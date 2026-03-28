@@ -396,8 +396,15 @@
 <div class="overlay" id="swipeOverlay" onclick="closeOverlay('swipeOverlay',event)">
   <div class="swipe-container" id="swipeContainer">
     <div class="swipe-header">
-      <h3>🎴 What are you craving?</h3>
-      <p>Swipe or tap to decide</p>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <h3>🎴 What are you craving?</h3>
+          <p>Swipe or tap to decide</p>
+        </div>
+        <button onclick="showWishlist()" style="background:rgba(255,255,255,0.1);border:1px solid var(--border);border-radius:8px;color:#fff;padding:8px 12px;font-size:0.8rem;cursor:pointer">
+          📋 My List <span id="wishlistCount"></span>
+        </button>
+      </div>
     </div>
     <div class="swipe-cards" id="swipeCards"></div>
     <div class="swipe-actions">

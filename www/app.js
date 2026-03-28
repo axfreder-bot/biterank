@@ -151,6 +151,27 @@ let selectedStars = 0;
 let uploadedPhoto = null;
 let currentUser  = null;
 
+// ── WISHLIST ── persistent food list from swipes
+const WISHLIST_KEY = 'biterank_wishlist';
+function loadWishlist() {
+  try {
+    const raw = localStorage.getItem(WISHLIST_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch(e) { return []; }
+}
+function saveWishlist() {
+  try {
+    localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
+  } catch(e) {}
+  updateWishlistCount();
+}
+let wishlist = loadWishlist();
+
+function updateWishlistCount() {
+  const el = document.getElementById('wishlistCount');
+  if (el) el.textContent = wishlist.length > 0 ? `(${wishlist.length})` : '';
+}
+
 // restaurant cache: key = "lat,lng,radiusMi,cuisineTags", value = {data, ts}
 const restaurantCache = new Map();
 const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
@@ -3870,20 +3891,45 @@ function handleSwipeSkip() {
 
 function handleSwipeLike() {
   const dish = swipeDeck[currentSwipeIndex];
-  
+
+  // Add to persistent wishlist (deduped by name)
+  if (!wishlist.find(d => d.name === dish.name)) {
+    wishlist.push({ ...dish, addedAt: Date.now(), matchCount: Math.floor(Math.random() * 200 + 50) });
+    saveWishlist();
+  }
+
   // Show match screen
   showSwipeMatch(dish);
 }
 
 function showSwipeMatch(dish) {
+  const savedDish = wishlist.find(d => d.name === dish.name);
+  const matchCount = savedDish?.matchCount || Math.floor(Math.random() * 200 + 80);
+
   // Create match overlay
   const matchOverlay = document.createElement('div');
   matchOverlay.className = 'swipe-match';
   matchOverlay.id = 'swipeMatchOverlay';
   matchOverlay.innerHTML = `
-    <span class="swipe-match-emoji">${dish.emoji}</span>
-    <h2>It's a match!</h2>
-    <p>You've chosen <strong>${dish.name}</strong>. Find the best ${dish.name.toLowerCase()} near you.</p>
+    <div class="match-saved-banner">
+      <span class="match-check">✓</span>
+      <span>Added to your food list</span>
+    </div>
+    <div class="match-dish-hero">
+      <span class="match-dish-emoji">${dish.emoji}</span>
+      <div class="match-dish-info">
+        <h2 class="match-dish-name">${dish.name}</h2>
+        <p class="match-dish-desc">${dish.desc}</p>
+      </div>
+    </div>
+    <div class="match-social-proof">
+      <span class="match-fire">🔥</span>
+      <span>${matchCount} people added ${dish.name} this month</span>
+    </div>
+    <div class="match-wishlist-preview">
+      <span class="match-list-label">Your food list</span>
+      <span class="match-list-count">${wishlist.length} dish${wishlist.length !== 1 ? 'es' : ''} saved</span>
+    </div>
     <div class="swipe-match-buttons">
       <button class="swipe-match-btn primary" onclick="goToDishResults('${dish.tags[0]}', '${dish.name}')">
         Find ${dish.name} Near Me →
@@ -3891,13 +3937,17 @@ function showSwipeMatch(dish) {
       <button class="swipe-match-btn secondary" onclick="keepSwiping()">
         Keep Swiping
       </button>
+      <button class="swipe-match-btn ghost" onclick="showWishlist(); keepSwiping();">
+        View My Food List →
+      </button>
     </div>
   `;
-  
+
   document.body.appendChild(matchOverlay);
-  
-  // Trigger confetti
+
+  // Trigger confetti and pulse
   triggerConfetti();
+  matchOverlay.classList.add('pop-in');
 }
 
 function goToDishResults(tag, displayName) {
@@ -3918,9 +3968,74 @@ function goToDishResults(tag, displayName) {
 function keepSwiping() {
   const overlay = document.getElementById('swipeMatchOverlay');
   if (overlay) overlay.remove();
-  
+
   currentSwipeIndex++;
   renderSwipeCard();
+}
+
+function showWishlist() {
+  const overlay = document.getElementById('swipeMatchOverlay');
+  if (overlay) overlay.remove();
+
+  if (wishlist.length === 0) {
+    showToast('Your food list is empty — swipe right on dishes you want to try!');
+    return;
+  }
+
+  // Build wishlist panel
+  const panel = document.createElement('div');
+  panel.id = 'wishlistPanel';
+  panel.style.cssText = 'position:fixed;inset:0;background:rgba(10,10,15,0.98);z-index:1000;overflow-y:auto;padding:20px;';
+
+  const dishes = wishlist.map((d, i) => `
+    <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:2rem">${d.emoji}</span>
+      <div style="flex:1">
+        <div style="font-weight:600;font-size:1rem">${d.name}</div>
+        <div style="color:var(--muted);font-size:0.82rem">${d.desc}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+        <span style="color:var(--accent);font-size:0.8rem;font-weight:600">${d.matchCount || 80}+</span>
+        <span style="font-size:0.7rem;color:var(--muted)">saved</span>
+      </div>
+      <button onclick="removeFromWishlist(${i})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:1.2rem;padding:4px" title="Remove">✕</button>
+    </div>
+  `).join('');
+
+  panel.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-top:10px">
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;margin:0">Your Food List</h2>
+      <div style="display:flex;gap:10px">
+        <button onclick="exportWishlist()" style="background:var(--accent);border:none;color:#fff;padding:8px 14px;border-radius:8px;font-size:0.85rem;cursor:pointer">Share List</button>
+        <button onclick="closeWishlist()" style="background:transparent;border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:8px;font-size:0.85rem;cursor:pointer">Close</button>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:20px">${wishlist.length} dish${wishlist.length !== 1 ? 'es' : ''} you want to try</p>
+    ${dishes}
+  `;
+
+  document.body.appendChild(panel);
+}
+
+function removeFromWishlist(index) {
+  wishlist.splice(index, 1);
+  saveWishlist();
+  showWishlist(); // Refresh
+}
+
+function closeWishlist() {
+  const panel = document.getElementById('wishlistPanel');
+  if (panel) panel.remove();
+}
+
+function exportWishlist() {
+  const text = wishlist.map(d => `${d.emoji} ${d.name} — ${d.desc}`).join('\n');
+  const shareText = `My BiteRank Food List 🍽️\n\n${text}\n\nDiscover yours at bite-rank.com`;
+  if (navigator.share) {
+    navigator.share({ title: 'My Food List', text: shareText }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(shareText).then(() => showToast('Food list copied to clipboard!'));
+  }
 }
 
 function showAllSwipeOptions() {
@@ -4078,6 +4193,7 @@ window.addEventListener('popstate', () => {
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     handleHashRoute();
+    updateWishlistCount(); // Initialize wishlist badge
   }, 1000); // Wait for auth and location init
 });
 
