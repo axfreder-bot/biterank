@@ -1102,5 +1102,269 @@
       "source": "Gemini AI",
       "seeded": true
     }
+  ],
+  "seeded_voodoo_donuts": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "The Grand Opening Special",
+      "text": "Voodoo Donuts is iconic for a reason. The Grand Opening Special — a chocolate doughnut with maple frosting, bacon, and Oreos — is an absolute flavor rollercoaster. Sweet, salty, savory, and completely unapologetic about it. Portland's food culture in one bite.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Voodoo Doll with Cream",
+      "text": "The signature Voodoo Doll — a sugar doughnut with chocolate frosting and a pretzel stake — is as photogenic as it is tasty. The cream filling is rich and not overly sweet. The novelty is real but the dough is genuinely good.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pine_street_market": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Hearthside Burger",
+      "text": "Pine Street Market's Hearthside Burger is a revelation — wagyu beef, aged cheddar, caramelized onions, and a secret sauce on a house-baked bun. The char from the open hearth gives it an incredible smoky depth. Best burger in Portland, hands down.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Affogado",
+      "text": "The Affogado — vanilla gelato with a shot of espresso and amaretto — is the perfect end to a Portland food hall crawl. Rich, cold, and just the right amount of bitter. Share one or don't. No judgment.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_tasty_n_daughters": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Shakshuka",
+      "text": "Tasty n Daughters serves the best shakshuka in the Pacific Northwest. The tomato-pepper sauce is deeply spiced and slightly sweet, poached eggs are runny perfection, and the sourdough for dipping is made in-house. Sunday brunch here is a religious experience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Fried Chicken",
+      "text": "Their fried chicken is exceptional — crispy, well-seasoned, and juicy. The honey butter drizzled over it is a nice touch. Served with collard greens and jalapeño cornbread. It's hearty, Southern-inspired comfort food done right.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_podnahs_pit": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Smoked Brisket",
+      "text": "Podnah's Pit is the real deal for Texas-style BBQ in Portland. The brisket is smoked for 14+ hours until it practically melts — bark that snaps, fat cap that's rendering into something magical. Served with two sauces: a classic tomato-based and a tangier vinegar number.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pulled Pork Sandwich",
+      "text": "The pulled pork is tender, smoke-kissed, and topped with tangy coleslaw on a brioche bun. The housemade pickles add crunch and acidity. It's a no-frills, just-done-right kind of sandwich. Feed a hungry crowd or eat two yourself.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_nongs_khao_man_gai": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Khao Man Gai",
+      "text": "Nong's Khao Man Gai is legendary for good reason. The chicken rice — poached chicken over fragrant garlic-cilantro rice with a Side of tamarind sauce — is deceptively simple but impossibly good. The tamarind sauce is the secret weapon. Portland's most beloved food cart turned brick-and-mortar.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Khao Soi",
+      "text": "Her Khao Soi is a rich, coconut curry noodle soup with tender chicken and a crispy noodle topping. The balance of sweet, savory, and earthy spices is masterful. One bowl and you'll understand why people line up at the food cart.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_tiffin_asha": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Butter Chicken",
+      "text": "Tiffin Asha puts a creative Indo-Canadian spin on classics. The butter chicken here has a richer, more complex spice profile than most — cardamom, fenugreek, and a hint of something smoky. Served with fluffy basmati and fresh naan. Comfort food with personality.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Masala Fries",
+      "text": "Masala fries are the ultimate fusion snack — crispy fries loaded with spiced chickpeas, tamarind chutney, yogurt sauce, and fresh cilantro. It's chaat meets poutine. Unexpectedly addictive and exactly what Portland food scene should be.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_grassa_pdx": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Cacio e Pepe",
+      "text": "Grassa does pasta the right way — handmade in-house, cooked precisely, sauced simply. The cacio e pepe is a masterclass in restraint: just pasta, pecorino, black pepper. The peppery bite cuts through the rich cheese. It's Italian done with serious respect.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Bolognese",
+      "text": "The Bolognese here simmers for hours, building deep meaty flavor. Served with wide pappardelle that holds the sauce perfectly. Comfort food elevated — the kind of dish that makes you want to cancel your dinner reservations and stay for seconds.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_ox_restaurant": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Asado",
+      "text": "Ox is Portland's best Argentinian grill experience. The asado — slow-grilled beef short ribs and flank steak over wood fire — has an incredible char and smoky depth. The chimichurri is bright and herbaceous. It's meat done right, with fire and patience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Empanadas",
+      "text": "The empanadas at Ox are perfectly fried — flaky dough, seasoned beef filling, served with a spicy green sauce. They're the ideal starter before the main event. Get two or three to share, or don't share at all.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_apizza_scholls": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Detroit-Style Pizza",
+      "text": "Apizza Scholls makes Detroit-style pizza the way it should be — thick, chewy crust with crispy edges, mozzarella layered right to the edge, sauce on top, and housemade Italian sausage. The pepperoni cups up perfectly. This is the best pizza in Portland, no contest.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "White Pizza",
+      "text": "The bianca — white pizza with ricotta, mozzarella, garlic, and olive oil — is for people who think pizza doesn't need tomato. The ricotta is creamy, the garlic is mellow, and the crust still delivers that signature Scholls chew. A welcome deviation from the classic.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_kenjis_pdx": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Fried Chicken Rice Bowl",
+      "text": "Kenji's fried chicken over rice with soft egg, scallions, and spicy mayo is the ultimate umami bomb. The chicken is shatteringly crispy, the egg yolk runs into the rice creating a rich sauce, and the spicy mayo brings just enough heat. Fast-casual done at an extremely high level.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Karé Kare",
+      "text": "The karé kare — oxtail stew with peanut sauce, eggplant, and bok choy — is rich, deeply flavored, and comes with a side of bagoong for added funk. It's a lesser-known Filipino classic done with care. Comforting in a completely different way than American food.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_truffle_pdx": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Truffle Fries",
+      "text": "Truffle's truffle fries are the gold standard — hand-cut, perfectly crispy, tossed in truffle oil, parmesan, and fresh herbs. They come with an aioli that's garlicky and bright. Worth the calories and then some.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Braised Short Rib",
+      "text": "The braised short rib is fork-tender, falling apart in the most satisfying way. Served with creamy polenta and a red wine reduction. It's the kind of dish you'd find at a high-end Montana lodge — hearty, refined, and deeply comforting.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
   ]
 }
