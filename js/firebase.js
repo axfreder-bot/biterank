@@ -10,7 +10,7 @@ import { getStorage, ref, uploadString, getDownloadURL }
   from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBvwnrcSog0xfG_9Q6PHt9SgN5YzH4g1TQ",
+  apiKey: "AIzaSyDyZNxnzY_F0U9ENwLdwTNKQlZrcNKXYCc",
   authDomain: "biterank-6b09e.firebaseapp.com",
   projectId: "biterank-6b09e",
   storageBucket: "biterank-6b09e.firebasestorage.app",
