@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BiteRank — Skip the Ambiance. Just the Food.</title>
+<meta name="description" content="Zero Stars for Vibe. All Stars for Taste. Find the best food near you without the noise of ambiance ratings.">
+<meta property="og:title" content="BiteRank — Skip the Ambiance. Just the Food.">
+<meta property="og:description" content="Zero Stars for Vibe. All Stars for Taste. Find the best food near you.">
+<meta property="og:image" content="https://www.bite-rank.com/og-image.png">
+<meta property="og:type" content="website">
+<link rel="manifest" href="/manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="css/styles.css"/>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BBLM8SZCKY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BBLM8SZCKY');
+</script>
+<!-- Firebase SDK -->
+<script type="module" src="js/firebase.js"></script>
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "BiteRank",
+  "description": "Skip the ambiance. Just the food. Find the best dishes near you.",
+  "url": "https://www.bite-rank.com",
+  "applicationCategory": "FoodAndDrink",
+  "operatingSystem": "Any"
+}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="logo" onclick="goHome()">Bite<span>Rank</span></div>
+  <div class="loc-pill" id="locPill" onclick="openLocPicker()">
+    <span>📍</span>
+    <span class="loc-pill-text" id="locPillText">Set location</span>
+    <span class="loc-caret">▾</span>
+  </div>
+  <div class="hdr-right" id="hdrRight">
+    <div class="level-badge" id="levelBadge" style="display:none" onclick="switchView('profile',document.querySelectorAll('.nitem')[4])"></div>
+    <button class="btn-ghost" onclick="openAuth('login')">Sign in</button>
+  </div>
+</header>
+
+<div class="main-content">
+
+  <!-- HOME -->
+  <div id="homeView" class="view active">
+    <div id="streakBanner" style="display:none" class="streak-banner">
+      <span class="streak-fire">🔥</span>
+      <div class="streak-text"><strong id="streakDays">0</strong> day streak — keep reviewing to keep it alive!</div>
+    </div>
+    <div id="homeCtxBar" class="loc-ctx" style="display:none">
+      <span>📍</span><span id="homeCtxLabel"></span>
+      <span class="loc-ctx-change" onclick="openLocPicker()">Change</span>
+    </div>
+    <div class="radius-bar" id="homeRadiusBar" style="display:none">
+      <span class="radius-bar-label">Within:</span>
+      <button class="rbtn" onclick="setRadius(1,this)">1 mi</button>
+      <button class="rbtn active" id="homeR3" onclick="setRadius(3,this)">3 mi</button>
+      <button class="rbtn" onclick="setRadius(5,this)">5 mi</button>
+      <button class="rbtn" onclick="setRadius(10,this)">10 mi</button>
+      <button class="rbtn" onclick="setRadius(null,this)">Any</button>
+    </div>
+    <div class="hero">
+      <div class="hero-tag">🍜 Zero Stars for Vibe · All Stars for Taste</div>
+      <h1>Skip the vibe.<br><em>Just the food.</em></h1>
+      <p>We don't care about the lighting, the playlist, or whether the server "checked in enough." Just tell us: is the ramen good?</p>
+      <div class="search-wrap">
+        <div class="search-row">
+          <input class="search-input" id="searchInput" type="text"
+            placeholder='"ramen in Seattle" or just "tacos"' autocomplete="off"/>
+          <button class="search-btn" onclick="doSearch()">Search</button>
+        </div>
+        <div class="quick-tags">
+          <span class="tag tag-special" onclick="nearMeNow()">🎯 Near Me Now</span>
+          <span class="tag" onclick="quickSearch('ramen')">🍜 Ramen</span>
+          <span class="tag" onclick="quickSearch('tacos')">🌮 Tacos</span>
+          <span class="tag" onclick="quickSearch('burger')">🍔 Burger</span>
+          <span class="tag" onclick="quickSearch('pizza')">🍕 Pizza</span>
+          <span class="tag" onclick="quickSearch('sushi')">🍣 Sushi</span>
+          <span class="tag" onclick="quickSearch('coffee')">☕ Coffee</span>
+          <span class="tag" onclick="quickSearch('thai')">🇹🇭 Thai</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- FOOD SWIPE DECIDER -->
+    <section id="foodSwiperSection">
+      <div class="sec-header">
+        <div class="sec-title">🎴 Can't Decide?</div>
+        <span class="sec-link" onclick="startFoodSwipe()">Start swiping →</span>
+      </div>
+      <p style="color:var(--muted);font-size:.82rem;margin-bottom:12px;">Swipe through dishes until you find what looks good.</p>
+      <div class="food-swiper-preview" onclick="startFoodSwipe()">
+        <div class="swipe-card-stack">
+          <div class="swipe-card next">
+            <span class="swipe-emoji">🍕</span>
+            <span class="swipe-label">Pizza</span>
+          </div>
+          <div class="swipe-card next">
+            <span class="swipe-emoji">🍔</span>
+            <span class="swipe-label">Burger</span>
+          </div>
+          <div class="swipe-card top">
+            <span class="swipe-emoji">🍜</span>
+            <span class="swipe-label">Ramen</span>
+            <div class="swipe-hint">Tap to swipe →</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FOOD PHOTO MOSAIC -->
+    <div class="food-mosaic">
+      <div class="mosaic-scroll" id="mosaicScroll">
+
+        <div class="mosaic-card" style="width:160px;height:200px" onclick="quickSearch('ramen')">
+          <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=320&q=80&auto=format&fit=crop" alt="Ramen" loading="lazy"/>
+          <div class="mosaic-card-label">
+            <div class="mosaic-card-dish">🍜 Ramen</div>
+            <div class="mosaic-card-action">Find near you →</div>
+          </div>
+        </div>
+
+        <div class="mosaic-card" style="width:200px;height:200px" onclick="quickSearch('sushi')">
+          <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&q=80&auto=format&fit=crop" alt="Sushi" loading="lazy"/>
+          <div class="mosaic-card-label">
+            <div class="mosaic-card-dish">🍣 Sushi</div>
+            <div class="mosaic-card-action">Find near you →</div>
+          </div>
+        </div>
+
+        <div class="mosaic-card" style="width:150px;height:200px" onclick="quickSearch('tacos')">
+          <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=300&q=80&auto=format&fit=crop" alt="Tacos" loading="lazy"/>
+          <div class="mosaic-card-label">
+            <div class="mosaic-card-dish">🌮 Tacos</div>
+            <div class="mosaic-card-action">Find near you →</div>
+          </div>
+        </div>
+
+        <div class="mosaic-card" style="width:180px;height:200px" onclick="quickSearch('burger')">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=360&q=80&auto=format&fit=crop" alt="Burger" loading="lazy"/>
+          <div class="mosaic-card-label">
+            <div class="mosaic-card-dish">🍔 Burger</div>
+            <div class="mosaic-card-action">Find near you →</div>
+          </div>
+        </div>
+
+        <div class="mosaic-card" style="width:160px;height:200px" onclick="quickSearch('pizza')">
+          <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=320&q=80&auto=format&fit=crop" alt="Pizza" loading="lazy"/>
+          <div class="mosaic-card-label">
+            <div class="mosaic-card-dish">🍕 Pizza</div>
+            <div class="mosaic-card-action">Find near you →</div>
+          </div>
+        </div>
+
+        <div class="mosaic-card" style="width:170px;height:200px" onclick="quickSearch('pho')">
+          <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=340&q=80&auto=format&fit=crop" alt="Pho" loading="lazy"/>
+          <div class="mosaic-card-label">
+            <div class="mosaic-card-dish">🍲 Pho</div>
+            <div class="mosaic-card-action">Find near you →</div>
+          </div>
+        </div>
+
+        <div class="mosaic-card" style="width:155px;height:200px" onclick="quickSearch('dim sum')">
+          <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=310&q=80&auto=format&fit=crop" alt="Dim Sum" loading="lazy"/>
+          <div class="mosaic-card-label">
+            <div class="mosaic-card-dish">🥟 Dim Sum</div>
+            <div class="mosaic-card-action">Find near you →</div>
+          </div>
+        </div>
+
+        <div class="mosaic-card" style="width:185px;height:200px" onclick="quickSearch('korean bbq')">
+          <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?w=370&q=80&auto=format&fit=crop" alt="Korean BBQ" loading="lazy"/>
+          <div class="mosaic-card-label">
+            <div class="mosaic-card-dish">🍖 Korean BBQ</div>
+            <div class="mosaic-card-action">Find near you →</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="trendingStrip" style="display:none;padding:10px 14px 4px">
+      <div class="sec-title" style="font-size:.82rem;margin-bottom:8px">🔥 Trending This Week</div>
+      <div id="trendingChips" style="display:flex;gap:7px;flex-wrap:wrap"></div>
+    </div>
+    <section>
+      <div class="sec-header"><div class="sec-title">Browse by cuisine</div></div>
+      <div class="cats-scroll">
+        <div class="cat-pill active" onclick="filterCat('',this)"><span class="cat-em">🌍</span><span class="cat-lb">All</span></div>
+        <div class="cat-pill" onclick="filterCat('japanese',this)"><span class="cat-em">🇯🇵</span><span class="cat-lb">Japanese</span></div>
+        <div class="cat-pill" onclick="filterCat('mexican',this)"><span class="cat-em">🇲🇽</span><span class="cat-lb">Mexican</span></div>
+        <div class="cat-pill" onclick="filterCat('american',this)"><span class="cat-em">🇺🇸</span><span class="cat-lb">American</span></div>
+        <div class="cat-pill" onclick="filterCat('italian',this)"><span class="cat-em">🇮🇹</span><span class="cat-lb">Italian</span></div>
+        <div class="cat-pill" onclick="filterCat('french',this)"><span class="cat-em">🇫🇷</span><span class="cat-lb">French</span></div>
+        <div class="cat-pill" onclick="filterCat('thai',this)"><span class="cat-em">🇹🇭</span><span class="cat-lb">Thai</span></div>
+        <div class="cat-pill" onclick="filterCat('chinese',this)"><span class="cat-em">🇨🇳</span><span class="cat-lb">Chinese</span></div>
+        <div class="cat-pill" onclick="filterCat('korean',this)"><span class="cat-em">🇰🇷</span><span class="cat-lb">Korean</span></div>
+      </div>
+    </section>
+    <div class="featured-strip">
+      <div class="featured-strip-title">📸 Real food. Real people. Zero vibes rating.</div>
+      <div class="feat-img-row">
+        <div class="feat-img" onclick="quickSearch('pasta')">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=240&q=80&auto=format&fit=crop" alt="Restaurant" loading="lazy"/>
+          <div class="feat-img-label">Pasta</div>
+        </div>
+        <div class="feat-img" onclick="quickSearch('breakfast')">
+          <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=240&q=80&auto=format&fit=crop" alt="Brunch" loading="lazy"/>
+          <div class="feat-img-label">Brunch</div>
+        </div>
+        <div class="feat-img" onclick="quickSearch('steak')">
+          <img src="https://images.unsplash.com/photo-1546833998-877b37c2e5c6?w=240&q=80&auto=format&fit=crop" alt="Steak" loading="lazy"/>
+          <div class="feat-img-label">Steak</div>
+        </div>
+        <div class="feat-img" onclick="quickSearch('dessert')">
+          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=240&q=80&auto=format&fit=crop" alt="Dessert" loading="lazy"/>
+          <div class="feat-img-label">Dessert</div>
+        </div>
+        <div class="feat-img" onclick="quickSearch('curry')">
+          <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=240&q=80&auto=format&fit=crop" alt="Curry" loading="lazy"/>
+          <div class="feat-img-label">Curry</div>
+        </div>
+        <div class="feat-img" onclick="quickSearch('coffee')">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=240&q=80&auto=format&fit=crop" alt="Coffee" loading="lazy"/>
+          <div class="feat-img-label">Coffee</div>
+        </div>
+        <div class="feat-img" onclick="quickSearch('seafood')">
+          <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=240&q=80&auto=format&fit=crop" alt="Seafood" loading="lazy"/>
+          <div class="feat-img-label">Seafood</div>
+        </div>
+        <div class="feat-img" onclick="quickSearch('sandwich')">
+          <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=240&q=80&auto=format&fit=crop" alt="Sandwich" loading="lazy"/>
+          <div class="feat-img-label">Sandwich</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="cityTilesSection">
+      <div class="sec-header"><div class="sec-title" id="nearbyTitle">🌆 Explore a city</div></div>
+      <div class="city-tiles-wrap">
+        <div class="city-tiles-grid" id="cityTilesGrid"></div>
+      </div>
+    </section>
+    <section id="nearbySection" style="display:none">
+      <div class="sec-header"><div class="sec-title" id="nearbyRestTitle">🔍 Restaurants nearby</div></div>
+      <div id="nearbyList"></div>
+    </section>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="resultsView" class="view">
+    <div id="resCtxBar" class="loc-ctx" style="display:none">
+      <span>📍</span><span id="resCtxLabel"></span>
+      <span class="loc-ctx-change" onclick="openLocPicker()">Change</span>
+    </div>
+    <div class="radius-bar">
+      <span class="radius-bar-label">Within:</span>
+      <button class="rbtn" onclick="setRadius(1,this)">1 mi</button>
+      <button class="rbtn active" onclick="setRadius(3,this)">3 mi</button>
+      <button class="rbtn" onclick="setRadius(5,this)">5 mi</button>
+      <button class="rbtn" onclick="setRadius(10,this)">10 mi</button>
+      <button class="rbtn" onclick="setRadius(null,this)">Any</button>
+    </div>
+    <div class="nbhd-bar" id="nbhdBar" style="display:none">
+      <span class="nbhd-label">📍</span>
+      <div id="nbhdChips" style="display:flex;gap:7px;flex-shrink:0"></div>
+    </div>
+    <section>
+      <div class="res-header">
+        <button class="back-btn" onclick="goHome()">←</button>
+        <div class="res-query">Results for <span id="queryLabel"></span></div>
+        <button onclick="shareCurrentView()" style="background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:4px 6px;margin-left:auto" title="Share">⬆️</button>
+      </div>
+      <div class="res-meta" id="resMeta"></div>
+      <div class="sort-bar">
+        <button class="sbtn active" id="sortNearest" onclick="setSort('nearest',this)">📍 Nearest</button>
+        <button class="sbtn" onclick="setSort('rating',this)">⭐ Rating</button>
+        <button class="sbtn" onclick="setSort('reviews',this)">💬 Reviews</button>
+        <button class="sbtn" onclick="setSort('open',this)">🟢 Open Now</button>
+      </div>
+      <!-- TAXONOMY DRILL-DOWN -->
+      <div class="taxonomy-wrap" id="taxonomyWrap" style="display:none">
+        <div class="taxonomy-trail" id="taxonomyTrail"></div>
+        <div class="taxonomy-nodes" id="taxonomyNodes"></div>
+      </div>
+      <div id="resultsList"></div>
+    </section>
+  </div>
+
+  <!-- CITY PAGE -->
+  <div id="cityView" class="view">
+    <div class="city-page-hero">
+      <div class="city-page-top">
+        <button class="city-page-back" onclick="goHome()">←</button>
+        <div class="city-page-em" id="cityPageEm">🌆</div>
+        <div class="city-page-info">
+          <div class="city-page-name" id="cityPageName">City</div>
+          <div class="city-page-sub" id="cityPageSub">Loading…</div>
+        </div>
+      </div>
+      <div class="city-search-row">
+        <input id="citySearchInput" placeholder="Search dishes in this city…" onkeydown="if(event.key==='Enter')doCitySearch()"/>
+        <button class="search-btn" style="padding:9px 15px;font-size:.83rem;border-radius:8px" onclick="doCitySearch()">Go</button>
+      </div>
+    </div>
+    <div class="city-tabs">
+      <button class="city-tab active" id="cityTabTop" onclick="setCityTab('top',this)">⭐ Top Rated</button>
+      <button class="city-tab" id="cityTabTrending" onclick="setCityTab('trending',this)">🔥 Trending</button>
+      <button class="city-tab" id="cityTabNearest" onclick="setCityTab('nearest',this)">📍 Nearest</button>
+      <button class="city-tab" id="cityTabNew" onclick="setCityTab('new',this)">✨ New</button>
+    </div>
+    <div class="city-content" id="cityContent"></div>
+  </div>
+
+  <!-- MAP -->
+  <div id="mapView" class="view">
+    <div class="map-top">
+      <div class="map-srow">
+        <input id="mapDishSearch" placeholder="Dish (e.g. Ramen, Tacos…)" onkeydown="if(event.key==='Enter')doMapSearch()"/>
+      </div>
+      <div class="map-srow">
+        <input id="mapLocSearch" placeholder="Neighborhood or city (e.g. Ballard, WA)" onkeydown="if(event.key==='Enter')doMapSearch()"/>
+        <button class="search-btn" style="padding:9px 13px;font-size:.83rem" onclick="doMapSearch()">Go</button>
+      </div>
+      <div id="mapLocBar" style="display:none;font-size:.75rem;color:var(--accent);padding:2px 2px 0;display:flex;align-items:center;gap:6px">
+        <span>📍</span><span id="mapLocBarLabel"></span>
+        <span style="margin-left:auto;color:var(--muted);cursor:pointer;font-size:.72rem" onclick="clearMapLoc()">✕ Reset to my location</span>
+      </div>
+      <div class="map-rrow">
+        <button class="rbtn" onclick="setMapRadius(1,this)">1 mi</button>
+        <button class="rbtn active" id="mapR3" onclick="setMapRadius(3,this)">3 mi</button>
+        <button class="rbtn" onclick="setMapRadius(5,this)">5 mi</button>
+        <button class="rbtn" onclick="setMapRadius(10,this)">10 mi</button>
+        <button class="rbtn" onclick="setMapRadius(null,this)">Any</button>
+      </div>
+    </div>
+    <div id="leafletMap"></div>
+    <div class="map-sheet">
+      <div class="map-sheet-hdr">
+        <span id="mapSheetTitle">📍 Restaurants near you</span>
+        <span class="map-sheet-cnt" id="mapSheetCnt"></span>
+      </div>
+      <div id="mapPinList"></div>
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <div id="profileView" class="view">
+    <div id="profileContent"></div>
+  </div>
+
+  <!-- SAVED -->
+  <div id="savedView" class="view">
+    <div style="padding:16px 16px 8px;display:flex;align-items:center;justify-content:space-between">
+      <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700">🔖 Saved Restaurants</div>
+      <button class="btn-ghost" style="font-size:.75rem;padding:5px 10px" onclick="savedList.clear();saveSavedList();renderSavedView();showToast('Cleared')">Clear all</button>
+    </div>
+    <div id="savedContent" style="padding:0 14px 20px"></div>
+  </div>
+
+  <!-- ADMIN DASHBOARD -->
+  <div id="adminView" class="view">
+    <div class="admin-header">
+      <button style="background:transparent;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:0 4px" onclick="goHome()">←</button>
+      <h1>⚙️ BiteRank Admin</h1>
+      <button class="admin-action-btn" style="margin-left:auto;font-size:.75rem" onclick="loadAdminTab(currentAdminTab)">↻ Refresh</button>
+    </div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="feedback" onclick="loadAdminTab('feedback',this)">💬 Feedback <span class="badge" id="feedbackBadge" style="display:none">0</span></button>
+      <button class="admin-tab" data-tab="flagged" onclick="loadAdminTab('flagged',this)">🚩 Flagged <span class="badge" id="flaggedBadge" style="display:none">0</span></button>
+      <button class="admin-tab" data-tab="reviews" onclick="loadAdminTab('reviews',this)">✍️ Reviews</button>
+      <button class="admin-tab" data-tab="analytics" onclick="loadAdminTab('analytics',this)">📊 Analytics</button>
+      <button class="admin-tab" data-tab="users" onclick="loadAdminTab('users',this)">👥 Admins</button>
+    </div>
+    <div class="admin-body" id="adminBody">
+      <div class="admin-empty">Loading…</div>
+    </div>
+  </div>
+
+</div><!-- /main-content -->
+
+<!-- FOOD SWIPER OVERLAY -->
+<div class="overlay" id="swipeOverlay" onclick="closeOverlay('swipeOverlay',event)">
+  <div class="swipe-container" id="swipeContainer">
+    <div class="swipe-header">
+      <h3>🎴 What are you craving?</h3>
+      <p>Swipe or tap to decide</p>
+    </div>
+    <div class="swipe-cards" id="swipeCards"></div>
+    <div class="swipe-actions">
+      <button class="swipe-btn skip" onclick="swipeSkip()">👎 Skip</button>
+      <button class="swipe-btn like" onclick="swipeLike()">❤️ Yes!</button>
+    </div>
+    <div class="swipe-progress" id="swipeProgress"></div>
+  </div>
+</div>
+
+<!-- FEEDBACK OVERLAY -->
+<div class="overlay" id="feedbackOverlay" onclick="closeOverlay('feedbackOverlay',event)">
+  <div class="sheet" id="feedbackSheet" style="padding:0 18px 30px">
+    <div class="drag-handle"></div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:4px">Share Feedback</h3>
+    <p style="color:var(--muted);font-size:.8rem;margin-bottom:16px">Not vibes. Not the server's attitude. Just food feedback.</p>
+    <div class="form-group">
+      <label class="form-label">Category</label>
+      <select class="form-input" id="fbCategory">
+        <option value="bug">🐛 Bug / Something broken</option>
+        <option value="feature">💡 Feature request</option>
+        <option value="content">📝 Content issue</option>
+        <option value="other">💬 General feedback</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Your feedback</label>
+      <textarea class="form-textarea" id="fbText" placeholder="Tell us what you think…" style="height:100px"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">How would you rate your experience?</label>
+      <div class="star-sel" id="fbStars">
+        <span class="s" onclick="setFbStar(1)">★</span>
+        <span class="s" onclick="setFbStar(2)">★</span>
+        <span class="s" onclick="setFbStar(3)">★</span>
+        <span class="s" onclick="setFbStar(4)">★</span>
+        <span class="s" onclick="setFbStar(5)">★</span>
+      </div>
+    </div>
+    <button class="submit-btn" onclick="submitFeedback()">Send Feedback</button>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bnav">
+  <button class="nitem active" onclick="switchView('home',this)"><span>🏠</span>Home</button>
+  <button class="nitem" onclick="switchView('map',this)"><span>🗺️</span>Map</button>
+  <button class="nitem" onclick="switchView('explore',this)"><span>🔍</span>Explore</button>
+  <button class="nitem" onclick="switchView('saved',this)"><span>🔖</span>Saved</button>
+  <button class="nitem" onclick="switchView('profile',this)"><span>👤</span>Profile</button>
+</nav>
+
+<!-- DISH DETAIL -->
+<div class="overlay" id="dishOverlay" onclick="closeOverlay('dishOverlay',event)">
+  <div class="sheet" id="dishSheet"></div>
+</div>
+
+<!-- REVIEW FORM -->
+<div class="overlay" id="reviewOverlay" onclick="closeOverlay('reviewOverlay',event)">
+  <div class="sheet" id="reviewSheet" style="padding:0 18px 30px"></div>
+</div>
+
+<!-- AUTH -->
+<div class="overlay" id="authOverlay" onclick="closeOverlay('authOverlay',event)">
+  <div class="sheet" id="authSheet" style="padding:0 22px 28px"></div>
+</div>
+
+<!-- LOC PICKER -->
+<div class="overlay" id="locOverlay" onclick="closeOverlay('locOverlay',event)">
+  <div class="sheet" id="locSheet" style="padding:0 20px 30px"></div>
+</div>
+
+<!-- DISH ITEM DETAIL -->
+<div class="overlay" id="dishItemOverlay" onclick="closeOverlay('dishItemOverlay',event)">
+  <div class="dish-detail-sheet" id="dishItemSheet"></div>
+</div>
+
+<!-- ADD DISH FORM -->
+<div class="overlay" id="addDishOverlay" onclick="closeOverlay('addDishOverlay',event)">
+  <div class="add-dish-form" id="addDishSheet"></div>
+</div>
+
+<canvas id="confettiCanvas"></canvas>
+<div class="xp-pop" id="xpPop"><span class="xp-icon">⚡</span><div><div class="xp-label" id="xpPopLabel">+50 XP</div><div class="xp-reason" id="xpPopReason">First review!</div></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "BiteRank - Skip the Ambiance. Just the Food.",
+  "short_name": "BiteRank",
+  "description": "Zero Stars for Vibe. All Stars for Taste. Find the best food near you.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0e0c",
+  "theme_color": "#e8854a",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

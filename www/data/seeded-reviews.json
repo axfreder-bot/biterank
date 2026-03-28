@@ -1,0 +1,1370 @@
+{
+  "seeded_hokkaido_ramen_santouka": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Toroniku Shio Ramen",
+      "text": "This ramen features incredibly tender pork cheek (toroniku) that melts in your mouth, served with a delicate yet flavorful shio broth. It's a truly luxurious and iconic ramen experience that sets a high bar.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_ramen_danbo": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Classic Tonkotsu Ramen",
+      "text": "Danbo's Tonkotsu is celebrated for its rich, creamy pork broth and highly customizable options for noodle firmness, broth richness, and spice level. This allows every diner to craft their perfect, deeply satisfying bowl.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_ooink": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Spicy Shoyu Ramen",
+      "text": "Ooink's Spicy Shoyu Ramen is a flavor explosion, known for its incredibly rich broth often enhanced with a generous layer of pork back fat and a customizable spice kick. It's a bold and deeply satisfying bowl that truly stands out.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_kizuki_ramen_izakaya": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Garlic Tonkotsu Ramen",
+      "text": "The Garlic Tonkotsu at Kizuki offers a robust and savory pork broth elevated by a fragrant garlic oil, adding an irresistible aromatic depth. It's a comforting and flavorful choice for those who love a strong garlic presence.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_betsutenjin_ramen": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Hakata Tonkotsu Ramen",
+      "text": "Betsutenjin brings authentic Hakata-style ramen to Seattle with its incredibly rich, milky white pork bone broth and thin, firm noodles. This bowl is a true taste of Fukuoka, perfect for purists seeking a classic experience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_arashi_ramen": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Black Garlic Tonkotsu Ramen",
+      "text": "This ramen takes a classic Tonkotsu broth and infuses it with fragrant black garlic oil (mayu), creating a distinctively nutty and complex flavor profile. It's a popular choice for those seeking a unique twist on a beloved classic.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_jinya_ramen_bar": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Spicy Creamy Vegan Ramen",
+      "text": "Jinya's vegan ramen is a standout, offering a surprisingly rich and creamy vegetable broth with a delightful spicy kick, proving that plant-based ramen can be incredibly satisfying. It's a fantastic option that doesn't compromise on flavor or texture.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_samurai_noodle": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Tonkotsu Ramen",
+      "text": "Samurai Noodle's Tonkotsu Ramen is a long-standing favorite, offering a consistently solid and comforting pork bone broth that hits all the right notes. It's a reliable choice for a classic and satisfying ramen experience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_menya_musashi": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "White Tsukemen",
+      "text": "Menya Musashi's White Tsukemen features thick, chewy noodles served separately from a rich, flavorful dipping broth, allowing for a unique and interactive eating experience. The broth is deeply savory, clinging perfectly to each noodle for an unforgettable bite.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_sushi_kashiba": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Omakase Nigiri",
+      "text": "Master Shiro Kashiba's artistry shines in this traditional Edomae-style omakase, featuring pristine, perfectly prepared seasonal fish. Each piece is a delicate balance of flavor and texture, showcasing decades of expertise.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Hokkaido Uni Nigiri",
+      "text": "The Hokkaido Uni Nigiri at Sushi Kashiba is an unparalleled experience, featuring incredibly fresh, creamy sea urchin that melts in your mouth. It's a luxurious and unforgettable bite that showcases the peak of quality and preparation.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_wataru": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Omakase Nigiri",
+      "text": "Wataru's omakase is an exquisite journey through the finest seasonal fish, meticulously sourced and expertly prepared by Chef Kotaro Kumita. Each nigiri piece is a tiny masterpiece, offering unparalleled freshness and nuanced flavors.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_mashiko": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Sustainable Omakase",
+      "text": "Mashiko's omakase offers a unique and delicious experience with a strong commitment to sustainable seafood sourcing. The chefs expertly craft each piece, highlighting the natural flavors of responsibly caught fish.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_japonessa": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Seattle Roll",
+      "text": "The Seattle Roll at Japonessa is a local favorite, combining spicy tuna, crab, and avocado, topped with seared salmon and a special sauce. It's a vibrant and flavorful fusion roll that perfectly captures the city's modern sushi scene.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_maneki_restaurant": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Futomaki",
+      "text": "Maneki's Futomaki is a nostalgic taste of Seattle's sushi history, a generously sized roll packed with traditional ingredients like tamago, kampyo, and various vegetables. It's a comforting and authentic choice from one of the city's oldest Japanese restaurants.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_umi_sake_house": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Crunchy Roll",
+      "text": "The Crunchy Roll at Umi Sake House is a textural delight, featuring shrimp tempura, avocado, and cucumber, topped with crispy tempura flakes and a sweet sauce. It's a crowd-pleaser that perfectly blends savory and crunchy elements.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_musashi_s": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Deluxe Nigiri Set",
+      "text": "Musashi's Deluxe Nigiri Set offers incredible value without compromising on freshness or quality, making high-quality sushi accessible to everyone. The fish is consistently fresh and expertly cut, providing a satisfying and authentic sushi experience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_i_love_sushi_lake_union": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Dragon Roll",
+      "text": "The Dragon Roll at I Love Sushi on Lake Union is a beautifully presented and delicious classic, featuring unagi, avocado, and cucumber, often topped with more avocado and a sweet unagi sauce. It's a consistently satisfying choice known for its rich flavors and appealing presentation.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_by_tae": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Handroll Set",
+      "text": "By Tae's Handroll Set offers a delightful and interactive sushi experience, featuring expertly prepared ingredients wrapped in crisp nori for immediate enjoyment. Each handroll bursts with fresh flavors and perfect textures, making it a highly sought-after treat.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_tacos_chukis": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Adobada Tacos (Chukis Style)",
+      "text": "These iconic street-style tacos feature perfectly marinated pork, served with a signature slice of pineapple and a sprinkle of cheese. The combination of sweet, savory, and tangy flavors makes them an absolute must-try in Seattle.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_marination_ma_kai": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Kalua Pork Tacos",
+      "text": "Marination's Kalua Pork Tacos are a Seattle institution, offering tender, smoky Hawaiian-style pulled pork topped with a vibrant tangy slaw. Enjoying these flavorful tacos with the stunning waterfront view is an unforgettable experience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_birrieria_tijuana": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Quesabirria Tacos",
+      "text": "These deeply flavorful birria tacos are a local sensation, featuring slow-cooked, tender beef stuffed into cheese-griddled tortillas and served with rich consommé for dipping. Each bite is an explosion of savory, cheesy goodness that keeps people coming back.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_carmelo_s_tacos": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Suadero Tacos",
+      "text": "Carmelo's Suadero Tacos are renowned for their incredibly tender, slow-cooked beef, offering an authentic taste of Mexico City street food. The perfectly rendered meat, simple toppings, and fresh tortillas create a truly sublime taco experience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_el_camion": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Al Pastor Tacos",
+      "text": "El Camion's Al Pastor tacos are a consistent crowd-pleaser, featuring thinly sliced, marinated pork cooked on a vertical spit and served with fresh pineapple. Their commitment to traditional preparation results in a perfectly balanced and flavorful taco.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_asadero_sinaloa": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Carne Asada Tacos",
+      "text": "For a premium taco experience, Asadero Sinaloa's Carne Asada Tacos are unparalleled, showcasing high-quality, perfectly grilled Sonoran-style steak. The smoky char and tender texture of the meat truly elevate this classic dish.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_la_carta_de_oaxaca": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Cochinita Pibil Tacos",
+      "text": "La Carta de Oaxaca brings the vibrant flavors of Yucatán to Seattle with their Cochinita Pibil Tacos, featuring slow-roasted pork marinated in achiote and sour orange. The tender, citrusy pork is a delightful departure from typical taco offerings.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_rancho_bravo_tacos": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Carnitas Tacos",
+      "text": "Rancho Bravo's Carnitas Tacos are a beloved staple, offering perfectly crispy yet tender slow-cooked pork that's rich in flavor. These no-frills tacos are consistently delicious and a go-to for authentic street-style carnitas.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pablo_y_pablo": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Baja Fish Tacos",
+      "text": "Pablo y Pablo's Baja Fish Tacos are a fresh and vibrant option, featuring perfectly crispy fried cod, crunchy cabbage, and a zesty crema. They offer a delightful textural contrast and a bright, satisfying flavor profile.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_dick_s_drive_in": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Dick's Deluxe",
+      "text": "A Seattle institution, the Dick's Deluxe is a simple, no-frills classic that has delighted generations with its perfectly grilled patty, special sauce, and fresh toppings. It's the quintessential late-night or quick-lunch burger, embodying Seattle's casual charm and delicious history.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_red_mill_burgers": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Red Mill Deluxe Burger",
+      "text": "Known for its generous portions and high-quality ingredients, the Red Mill Deluxe is a gloriously messy and incredibly satisfying burger experience. The crispy bacon, proprietary Mill Sauce, and perfectly cooked patty make it a legendary indulgence that's worth the wait.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_loretta_s_northwesterner": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Loretta's Burger",
+      "text": "This unassuming dive bar burger is a masterclass in simplicity, featuring a perfectly smashed patty, melted American cheese, and classic fixings on a soft bun. It's a no-frills, incredibly juicy, and perfectly balanced burger that locals consistently rave about as one of the city's best.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_katsu_burger": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Godzilla Attack Burger",
+      "text": "A unique and flavorful twist on the classic, the Godzilla Attack Burger features a crispy panko-fried beef patty, spicy mayo, and tonkatsu sauce. This Japanese-inspired creation offers an explosion of textures and tastes, making it a standout choice for adventurous burger lovers.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_8oz_burger_co": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "The 8oz Burger",
+      "text": "The namesake burger at 8oz Burger & Co. showcases premium ingredients, including a perfectly cooked grass-fed patty, Beecher's Flagship cheddar, and house-made sauces. It's a sophisticated and incredibly flavorful gourmet burger that elevates the classic to an art form.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_uneeda_burger": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "The Classic Burger",
+      "text": "Uneeda Burger's Classic is a testament to quality ingredients and expert preparation, featuring a perfectly grilled patty, fresh lettuce, tomato, onion, and their signature sauce. It's a consistently delicious and satisfying burger that hits all the right notes for a well-crafted meal.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_lil_woody_s": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "The Woody's Burger",
+      "text": "The Woody's Burger is a beloved staple, known for its juicy beef patty, Tillamook cheddar, house-made pickles, and special Lil Woody's Sauce. It's a perfectly balanced and consistently delicious burger that embodies the restaurant's fun and approachable vibe.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_dahlia_bakery": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "The Dahlia Burger",
+      "text": "A sophisticated take on the classic, The Dahlia Burger from Tom Douglas's iconic establishment features a high-quality patty, aged cheddar, and house-made pickles on a brioche bun. It's a consistently excellent and refined burger, perfect for a more upscale yet comforting dining experience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_burgermaster": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Cheeseburger",
+      "text": "A true Seattle classic, the Burgermaster Cheeseburger offers a nostalgic drive-in experience with its simple, perfectly grilled patty, melted cheese, and fresh toppings. It's a consistently satisfying and unpretentious burger that has been a local favorite for decades.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_delancey": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Margherita",
+      "text": "Delancey's Margherita is a masterclass in simplicity, featuring a perfectly charred crust, bright tomato sauce, fresh mozzarella, and fragrant basil. It's a testament to quality ingredients and expert execution, making every bite a sublime experience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_serious_pie": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Roasted Mushroom & Truffle Cheese",
+      "text": "This pizza is a gourmet delight, boasting an earthy richness from roasted mushrooms and the luxurious aroma of truffle cheese. The thin, crispy crust provides the perfect canvas for these deep, savory flavors that truly sing.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pagliacci_pizza": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "The Original",
+      "text": "A true Seattle institution, The Original delivers classic comfort with its perfectly balanced blend of pepperoni and mushrooms. It's a consistently satisfying choice that locals have loved for decades, perfect for any casual pizza night.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_tutta_bella_neapolitan_pizzeria": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Margherita D.O.C.",
+      "text": "Tutta Bella's Margherita D.O.C. adheres strictly to Neapolitan tradition, featuring San Marzano tomatoes, fresh mozzarella, and a beautifully blistered crust from their wood-fired oven. This authentic pie transports you straight to Naples with its vibrant, fresh flavors.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_bar_del_corso": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Salsiccia",
+      "text": "The Salsiccia pizza at Bar del Corso is a standout, showcasing their incredible house-made sausage with a perfect balance of spice and fennel. Paired with a light tomato sauce and fresh mozzarella on a chewy, charred crust, it's a truly memorable pie.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_dino_s_tomato_pie": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "The OG",
+      "text": "Dino's The OG is the quintessential Detroit-style pizza, featuring a thick, airy crust with crispy cheese edges and a vibrant red sauce on top. It's a deeply satisfying and unique pizza experience that's become a beloved local favorite.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_moto_pizza": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "The Crab Pizza",
+      "text": "MOTO's Crab Pizza is an adventurous and unforgettable creation, loaded with sweet crab meat, garlic, and a creamy sauce, all on their signature deep-dish crust. This innovative pie is a must-try for anyone seeking a truly unique and decadent pizza experience in Seattle.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pizzeria_22": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Diavola",
+      "text": "For those who love a bit of heat, Pizzeria 22's Diavola delivers with spicy salami and a perfectly blistered crust. The fiery kick is balanced by the fresh mozzarella and tomato, creating a robust and exciting flavor profile.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_ballard_pizza_company": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "The Ballard",
+      "text": "The Ballard is a beloved neighborhood staple, generously topped with classic pepperoni, sausage, mushrooms, and olives on a satisfyingly chewy crust. It's a reliable and delicious choice that embodies the spirit of a great New York-style slice.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_rococo_pizza": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pepperoni",
+      "text": "Rococo Pizza's classic Pepperoni pie is a masterclass in New York-style simplicity, featuring perfectly cupped, crispy pepperoni and a fantastic cheese pull. The thin, foldable crust and savory toppings make it an incredibly satisfying and authentic slice.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_spinasse": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Tajarin al Burro e Salvia",
+      "text": "The delicate, impossibly thin strands of house-made tajarin are perfectly coated in a rich, nutty brown butter and sage sauce. It's a simple dish executed with such precision and flavor that it feels truly transcendent.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_tavol_ta": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Spicy Spaghetti",
+      "text": "This signature dish delivers a perfect kick of heat balanced with garlic, chili, and a hint of mint, all clinging to perfectly al dente spaghetti. It's a bold, satisfying plate that keeps locals coming back for more.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_il_corvo_pasta": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Mafalde with Pork Ragu",
+      "text": "While their menu rotates daily, Il Corvo's rich, slow-cooked ragu dishes, often served with beautifully textured mafalde or other fresh pasta, are consistently outstanding. The pasta itself is a revelation, perfectly al dente and made with incredible care.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_artusi": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Cacio e Pepe",
+      "text": "Artusi's rendition of this Roman classic is a masterclass in simplicity, featuring perfectly emulsified Pecorino Romano and black pepper sauce clinging to al dente pasta. It's a comforting and deeply flavorful dish that highlights the quality of its few ingredients.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_cafe_lago": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Lasagne al Forno",
+      "text": "Cafe Lago's lasagne is a beloved institution, featuring delicate house-made pasta layered with a rich bechamel, savory meat ragu, and generous amounts of cheese. It's a hearty, comforting dish that embodies classic Italian home cooking.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_la_medusa": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Bucatini alla Norma",
+      "text": "This Sicilian staple shines with perfectly cooked bucatini tossed in a vibrant tomato sauce with tender eggplant, basil, and salty ricotta salata. It's a beautifully balanced and deeply satisfying vegetarian option.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_san_fermo": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Tagliatelle al Ragu Bolognese",
+      "text": "San Fermo's Bolognese is a comforting and rich classic, featuring slow-simmered meat ragu clinging to perfectly textured house-made tagliatelle. It's a hearty and authentic dish that transports you straight to Italy.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pasta_casalinga": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Spaghetti Carbonara",
+      "text": "Pasta Casalinga delivers a truly authentic Carbonara, with perfectly emulsified egg, Pecorino Romano, crispy guanciale, and black pepper coating fresh, al dente spaghetti. It's a rich, creamy, and deeply satisfying Roman classic done right.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_the_pink_door": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pappardelle al Cinghiale",
+      "text": "The Pink Door's wild boar ragu is a deeply flavorful and rustic dish, with tender, slow-cooked meat clinging to broad, house-made pappardelle noodles. It's a rich and hearty option that perfectly complements the restaurant's unique ambiance.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_mondello_ristorante": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Penne al Salmone",
+      "text": "Mondello's Penne al Salmone is a beloved neighborhood favorite, featuring tender salmon pieces in a creamy tomato sauce with a hint of vodka, tossed with al dente penne. It's a comforting and surprisingly elegant dish that locals adore.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pho_bac_sup_shop": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Pho Dac Biet (Special Combo Pho)",
+      "text": "This iconic dish from Pho Bac Sup Shop offers a deeply flavorful and aromatic broth, a true benchmark for Seattle pho. It's a classic, comforting bowl that perfectly balances all the traditional elements.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_dong_thap_noodles": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Pho Dac Biet with Handmade Noodles",
+      "text": "Famous for its incredibly fresh, chewy handmade noodles, this pho provides a unique textural experience unlike any other. The robust broth and generous portions make for an unforgettable and hearty meal.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pho_than_brothers": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pho Tai (Rare Steak Pho)",
+      "text": "A Seattle institution, Than Brothers consistently delivers a clean, aromatic broth with perfectly tender rare steak. It's a reliable and comforting choice for a classic, no-frills pho experience loved by many.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_green_leaf_vietnamese_restaurant": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pho Ga (Chicken Pho)",
+      "text": "While known for other dishes, their Pho Ga stands out for its exceptionally clear, sweet chicken broth and tender shredded chicken. It offers a lighter yet equally satisfying alternative to traditional beef pho.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pho_cyclo_cafe": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pho Tai Nam Gan Sach",
+      "text": "Pho Cyclo's broth is consistently praised for its depth and balance, hitting all the right savory notes. The variety of textures from the different cuts of meat makes each spoonful interesting and satisfying.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_ba_bar": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Pho Bo Vien (Beef Meatball Pho)",
+      "text": "Ba Bar elevates traditional pho with high-quality ingredients and a refined broth that feels both authentic and gourmet. Their springy, flavorful beef meatballs are a highlight, adding a delightful chewiness to the rich broth.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pho_viet_anh": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pho Tai Gan (Rare Steak and Tendon Pho)",
+      "text": "A beloved neighborhood spot, Pho Viet Anh is known for its consistently flavorful and well-balanced broth. The tender rare steak combined with the gelatinous tendon creates a delightful textural contrast that keeps people coming back.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_huong_binh": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pho Dac Biet (Special Combo Pho)",
+      "text": "As a long-standing International District institution, Huong Binh serves a comforting and traditional pho with a deeply savory broth. It's a taste of classic Vietnamese home cooking, consistently satisfying and authentic.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pho_99": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pho Tai Chin (Rare Steak and Brisket Pho)",
+      "text": "Pho 99 is celebrated for its incredibly fragrant and clear broth, which is simmered to perfection. The combination of tender rare steak and melt-in-your-mouth brisket offers a hearty and satisfying experience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_jade_garden": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Har Gow (Steamed Shrimp Dumplings)",
+      "text": "These translucent dumplings are packed with perfectly cooked, sweet shrimp, offering a delightful snap with every bite. The delicate wrapper holds the succulent filling beautifully, making them a benchmark for quality.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Char Siu Bao (Steamed BBQ Pork Buns)",
+      "text": "The fluffy, cloud-like buns at Jade Garden are legendary, encasing a generous portion of sweet and savory barbecued pork. Each bite is a perfect balance of soft dough and rich, flavorful filling.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Siu Mai (Steamed Pork & Shrimp Dumplings)",
+      "text": "A vibrant yellow wrapper encases a savory blend of seasoned pork and shrimp, often topped with a touch of roe. They are consistently juicy and flavorful, a quintessential dim sum experience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Lo Bak Go (Pan-Fried Turnip Cake)",
+      "text": "Jade Garden's turnip cake is pan-fried to a beautiful crisp on the outside while remaining tender and savory within, studded with dried shrimp and Chinese sausage. It's a comforting and flavorful classic.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_harbor_city_restaurant": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Cheung Fun (Shrimp Rice Noodle Rolls)",
+      "text": "Harbor City's cheung fun boasts incredibly smooth, thin rice noodles that melt in your mouth, wrapped around plump, fresh shrimp. Drizzled with a light soy sauce, it's a delicate and satisfying dish.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Fung Zao (Braised Chicken Feet)",
+      "text": "For the adventurous palate, these chicken feet are braised to tender perfection, falling off the bone with a rich, savory, and slightly spicy sauce. It's a deeply flavorful and authentic dim sum delicacy.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Dan Tat (Baked Egg Tarts)",
+      "text": "The egg tarts here feature a wonderfully flaky pastry crust filled with a silky-smooth, sweet custard that's not overly sugary. They make for a delightful sweet ending to any dim sum feast.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_honey_court_seafood_restaurant": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Lo Mai Gai (Sticky Rice in Lotus Leaf)",
+      "text": "This hearty dish features fragrant glutinous rice steamed with savory chicken, Chinese sausage, and mushrooms, all wrapped in a lotus leaf. The aroma and rich flavors infuse every grain of rice, making it incredibly satisfying.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_dough_zone_dumpling_house": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Xiao Long Bao (Pork Soup Dumplings)",
+      "text": "Dough Zone's XLB are a true masterpiece, with delicate wrappers holding a rich, savory pork filling and an explosion of hot, flavorful broth. Each dumpling is a perfect balance of texture and taste, a must-try for any dumpling lover.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Sheng Jian Bao (Pan-Fried Pork Buns)",
+      "text": "These pan-fried buns offer an incredible textural contrast: a crispy, golden-brown bottom, fluffy steamed top, and a juicy pork filling with a burst of soup. They are incredibly satisfying and addictive.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_thai_tom": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Classic Pad Thai with Shrimp",
+      "text": "Thai Tom's Pad Thai is legendary for its intense wok hei, perfectly chewy noodles, and a harmonious balance of sweet, sour, and savory flavors. It's a quintessential Seattle experience, offering an authentic taste of street-style Thai cuisine that keeps locals coming back for more.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_may_kitchen_bar": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Pad Thai with Prawns",
+      "text": "While a scenic ferry ride away on Vashon Island, May Kitchen + Bar's Pad Thai is a destination dish, celebrated for its elegant presentation and deeply nuanced flavors. Made with high-quality, fresh ingredients, the sauce is a delicate masterpiece that truly elevates the classic dish.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_kin_len_thai_night_bites": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pad Thai Kin Len Style",
+      "text": "Kin Len's Pad Thai offers a vibrant and authentic street-food experience, known for its perfectly cooked noodles and a sauce that strikes a delightful balance. It's praised for its fresh, bold flavors that transport you straight to the bustling night markets of Thailand.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_remarkable_thai": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Remarkable Pad Thai",
+      "text": "This restaurant lives up to its name with a consistently excellent Pad Thai that is both comforting and remarkably flavorful. The dish is known for its well-balanced sauce that avoids being overly sweet, making it a reliable choice for a satisfying meal.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_racha_noodle_thai_cuisine": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pad Thai with Chicken",
+      "text": "Racha's Pad Thai is a beloved staple, offering a comforting and flavorful rendition that consistently hits the mark. The noodles are always perfectly cooked, and the sauce is a delightful blend of traditional sweet, sour, and savory notes.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_aroy_seattle": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Authentic Pad Thai",
+      "text": "Aroy Seattle is celebrated for its commitment to authentic Thai flavors, and their Pad Thai is a testament to this dedication. It boasts a deep, complex sauce and fresh ingredients that truly capture the essence of traditional Thai cooking.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_manao_thai_street_eats": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Street Style Pad Thai",
+      "text": "True to its name, Manao delivers a vibrant and robust Street Style Pad Thai that perfectly encapsulates the energy of Thai street food. The dish is known for its generous portions and an intensely flavorful profile that satisfies every craving.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_noodle_boat": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pad Thai with Tofu",
+      "text": "Noodle Boat is a local favorite for its consistent quality and generous portions, and their Pad Thai is a standout. It offers a perfect balance of sweet, sour, and savory, with perfectly cooked noodles and fresh ingredients.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pattaya_restaurant_bar": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pattaya Pad Thai",
+      "text": "A long-standing establishment, Pattaya's Pad Thai is a comforting and reliable choice, known for its classic preparation and well-balanced flavors. It's a beloved neighborhood staple that consistently delivers a satisfying meal.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_bangkok_garden": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Traditional Pad Thai with Shrimp",
+      "text": "Bangkok Garden offers a time-tested Pad Thai recipe that has delighted Seattle diners for years. Its rich, tangy, and slightly sweet sauce perfectly coats the tender noodles and fresh shrimp, making it an consistently enjoyable dish.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_voodoo_donuts": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "The Grand Opening Special",
+      "text": "Voodoo Donuts is iconic for a reason. The Grand Opening Special — a chocolate doughnut with maple frosting, bacon, and Oreos — is an absolute flavor rollercoaster. Sweet, salty, savory, and completely unapologetic about it. Portland's food culture in one bite.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Voodoo Doll with Cream",
+      "text": "The signature Voodoo Doll — a sugar doughnut with chocolate frosting and a pretzel stake — is as photogenic as it is tasty. The cream filling is rich and not overly sweet. The novelty is real but the dough is genuinely good.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pine_street_market": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Hearthside Burger",
+      "text": "Pine Street Market's Hearthside Burger is a revelation — wagyu beef, aged cheddar, caramelized onions, and a secret sauce on a house-baked bun. The char from the open hearth gives it an incredible smoky depth. Best burger in Portland, hands down.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Affogado",
+      "text": "The Affogado — vanilla gelato with a shot of espresso and amaretto — is the perfect end to a Portland food hall crawl. Rich, cold, and just the right amount of bitter. Share one or don't. No judgment.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_tasty_n_daughters": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Shakshuka",
+      "text": "Tasty n Daughters serves the best shakshuka in the Pacific Northwest. The tomato-pepper sauce is deeply spiced and slightly sweet, poached eggs are runny perfection, and the sourdough for dipping is made in-house. Sunday brunch here is a religious experience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Fried Chicken",
+      "text": "Their fried chicken is exceptional — crispy, well-seasoned, and juicy. The honey butter drizzled over it is a nice touch. Served with collard greens and jalapeño cornbread. It's hearty, Southern-inspired comfort food done right.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_podnahs_pit": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Smoked Brisket",
+      "text": "Podnah's Pit is the real deal for Texas-style BBQ in Portland. The brisket is smoked for 14+ hours until it practically melts — bark that snaps, fat cap that's rendering into something magical. Served with two sauces: a classic tomato-based and a tangier vinegar number.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pulled Pork Sandwich",
+      "text": "The pulled pork is tender, smoke-kissed, and topped with tangy coleslaw on a brioche bun. The housemade pickles add crunch and acidity. It's a no-frills, just-done-right kind of sandwich. Feed a hungry crowd or eat two yourself.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_nongs_khao_man_gai": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Khao Man Gai",
+      "text": "Nong's Khao Man Gai is legendary for good reason. The chicken rice — poached chicken over fragrant garlic-cilantro rice with a Side of tamarind sauce — is deceptively simple but impossibly good. The tamarind sauce is the secret weapon. Portland's most beloved food cart turned brick-and-mortar.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Khao Soi",
+      "text": "Her Khao Soi is a rich, coconut curry noodle soup with tender chicken and a crispy noodle topping. The balance of sweet, savory, and earthy spices is masterful. One bowl and you'll understand why people line up at the food cart.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_tiffin_asha": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Butter Chicken",
+      "text": "Tiffin Asha puts a creative Indo-Canadian spin on classics. The butter chicken here has a richer, more complex spice profile than most — cardamom, fenugreek, and a hint of something smoky. Served with fluffy basmati and fresh naan. Comfort food with personality.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Masala Fries",
+      "text": "Masala fries are the ultimate fusion snack — crispy fries loaded with spiced chickpeas, tamarind chutney, yogurt sauce, and fresh cilantro. It's chaat meets poutine. Unexpectedly addictive and exactly what Portland food scene should be.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_grassa_pdx": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Cacio e Pepe",
+      "text": "Grassa does pasta the right way — handmade in-house, cooked precisely, sauced simply. The cacio e pepe is a masterclass in restraint: just pasta, pecorino, black pepper. The peppery bite cuts through the rich cheese. It's Italian done with serious respect.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Bolognese",
+      "text": "The Bolognese here simmers for hours, building deep meaty flavor. Served with wide pappardelle that holds the sauce perfectly. Comfort food elevated — the kind of dish that makes you want to cancel your dinner reservations and stay for seconds.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_ox_restaurant": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Asado",
+      "text": "Ox is Portland's best Argentinian grill experience. The asado — slow-grilled beef short ribs and flank steak over wood fire — has an incredible char and smoky depth. The chimichurri is bright and herbaceous. It's meat done right, with fire and patience.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Empanadas",
+      "text": "The empanadas at Ox are perfectly fried — flaky dough, seasoned beef filling, served with a spicy green sauce. They're the ideal starter before the main event. Get two or three to share, or don't share at all.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_apizza_scholls": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Detroit-Style Pizza",
+      "text": "Apizza Scholls makes Detroit-style pizza the way it should be — thick, chewy crust with crispy edges, mozzarella layered right to the edge, sauce on top, and housemade Italian sausage. The pepperoni cups up perfectly. This is the best pizza in Portland, no contest.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "White Pizza",
+      "text": "The bianca — white pizza with ricotta, mozzarella, garlic, and olive oil — is for people who think pizza doesn't need tomato. The ricotta is creamy, the garlic is mellow, and the crust still delivers that signature Scholls chew. A welcome deviation from the classic.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_kenjis_pdx": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Fried Chicken Rice Bowl",
+      "text": "Kenji's fried chicken over rice with soft egg, scallions, and spicy mayo is the ultimate umami bomb. The chicken is shatteringly crispy, the egg yolk runs into the rice creating a rich sauce, and the spicy mayo brings just enough heat. Fast-casual done at an extremely high level.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Karé Kare",
+      "text": "The karé kare — oxtail stew with peanut sauce, eggplant, and bok choy — is rich, deeply flavored, and comes with a side of bagoong for added funk. It's a lesser-known Filipino classic done with care. Comforting in a completely different way than American food.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ],
+  "seeded_truffle_pdx": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Truffle Fries",
+      "text": "Truffle's truffle fries are the gold standard — hand-cut, perfectly crispy, tossed in truffle oil, parmesan, and fresh herbs. They come with an aioli that's garlicky and bright. Worth the calories and then some.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Braised Short Rib",
+      "text": "The braised short rib is fork-tender, falling apart in the most satisfying way. Served with creamy polenta and a red wine reduction. It's the kind of dish you'd find at a high-end Montana lodge — hearty, refined, and deeply comforting.",
+      "photo": null,
+      "source": "Gemini AI",
+      "seeded": true
+    }
+  ]
+}
