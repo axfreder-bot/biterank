@@ -16,7 +16,7 @@ const firebaseConfig = {
   storageBucket: "biterank-6b09e.firebasestorage.app",
   messagingSenderId: "189015732878",
   appId: "1:189015732878:web:5bd71f50ef74b97d784fdf",
-  measurementId: "G-TVDYFT6RCR"
+  measurementId: "G-BBLM8SZCKY"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -52,20 +52,24 @@ window._fsAddReview = async (restaurantId, reviewData) => {
   return ref.id;
 };
 window._fsFetchReviews = async (restaurantId) => {
-  const q = query(
-    collection(db, 'reviews'),
-    orderBy('ts', 'desc'),
-    limit(100)
-  );
-  const snap = await getDocs(q);
-  const results = [];
-  snap.forEach(d => {
-    const data = d.data();
-    if (data.restaurantId === restaurantId) {
-      results.push({ firestoreId: d.id, ...data });
-    }
-  });
-  return results;
+  try {
+    // Try server-side filter first (requires composite index on restaurantId + ts)
+    const q = query(
+      collection(db, 'reviews'),
+      where('restaurantId', '==', restaurantId),
+      orderBy('ts', 'desc'),
+      limit(100)
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
+  } catch(e) {
+    // Fall back to client-side filter if index doesn't exist
+    const q = query(collection(db, 'reviews'), orderBy('ts', 'desc'), limit(200));
+    const snap = await getDocs(q);
+    return snap.docs
+      .filter(d => d.data().restaurantId === restaurantId)
+      .map(d => ({ firestoreId: d.id, ...d.data() }));
+  }
 };
 window._fsDeleteReview = (id) => deleteDoc(doc(db, 'reviews', id));
 window._fsFetchAllReviews = (lim=100) =>

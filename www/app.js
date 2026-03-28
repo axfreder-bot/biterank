@@ -151,8 +151,10 @@ let selectedStars = 0;
 let uploadedPhoto = null;
 let currentUser  = null;
 
-// restaurant cache: key = "lat,lng,radiusMi,cuisureTags"
+// restaurant cache: key = "lat,lng,radiusMi,cuisineTags", value = {data, ts}
 const restaurantCache = new Map();
+const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
+const MAX_CACHE_SIZE = 50;
 
 // local review store keyed by OSM id
 let localReviews = {};
@@ -293,7 +295,8 @@ function googleToRestaurant(place) {
 
 async function fetchRestaurants(lat, lng, radiusMi, cuisineTags) {
   const cacheKey = `gpl_${lat.toFixed(3)},${lng.toFixed(3)},${radiusMi},${(cuisineTags||[]).join(',')}`;
-  if(restaurantCache.has(cacheKey)) return restaurantCache.get(cacheKey);
+  const cached = restaurantCache.get(cacheKey);
+  if (cached && (Date.now() - cached.ts < CACHE_TTL_MS)) return cached.data;
 
   const radiusM = radiusMi ? Math.min(miToM(radiusMi), 50000) : 5000;
   const q = cuisineTags && cuisineTags.length ? cuisineTags[0] + ' restaurant' : 'restaurant';
@@ -318,7 +321,12 @@ async function fetchRestaurants(lat, lng, radiusMi, cuisineTags) {
     .map(googleToRestaurant)
     .filter(Boolean);
 
-  restaurantCache.set(cacheKey, results);
+  // Evict oldest entry if at capacity
+  if (restaurantCache.size >= MAX_CACHE_SIZE) {
+    const oldest = [...restaurantCache.entries()].sort((a,b) => a[1].ts - b[1].ts)[0];
+    restaurantCache.delete(oldest[0]);
+  }
+  restaurantCache.set(cacheKey, { data: results, ts: Date.now() });
   return results;
 }
 
@@ -1337,7 +1345,7 @@ function handlePhoto(e) {
         const url = await window._uploadPhoto(dataUrl, path);
         uploadedPhoto = url; // replace data URL with storage URL
       } catch(err) {
-        console.warn('Photo upload failed, using local copy:', err.message);
+        showToast('⚠️ Photo upload failed — review still submitted');
         // Keep local data URL as fallback
       }
     }
@@ -1913,8 +1921,22 @@ const XP = {
   completion:    200,  // finished all dishes at a restaurant
 };
 
-// ── GAME STATE ── persisted in memory (would be localStorage in production)
-let gameState = {
+// ── GAME STATE ── persisted in localStorage
+const GAME_STATE_KEY = 'biterank_gamestate';
+function loadGameState() {
+  try {
+    const raw = localStorage.getItem(GAME_STATE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return null;
+}
+function saveGameState() {
+  try {
+    localStorage.setItem(GAME_STATE_KEY, JSON.stringify(gameState));
+  } catch(e) {}
+}
+
+let gameState = loadGameState() || {
   xp: 0,
   totalReviews: 0,
   totalPhotos: 0,
@@ -1963,6 +1985,7 @@ function updateStreak() {
   }
   gameState.lastReviewDate = today;
   gameState.maxStreak = Math.max(gameState.maxStreak, gameState.currentStreak);
+  saveGameState();
 }
 
 // ── AWARD XP & CHECK BADGES ──
@@ -1994,12 +2017,14 @@ function awardXP(amount, reason, isPioneer = false, hasPhoto = false) {
   checkBadges();
   updateStreakBanner();
   updateLevelBadge();
+  saveGameState();
 }
 
 function checkBadges() {
   BADGE_DEFS.forEach(b => {
     if (!gameState.earnedBadges.includes(b.id) && b.check(gameState)) {
       gameState.earnedBadges.push(b.id);
+      saveGameState();
       setTimeout(() => {
         showXPPop(`${b.emoji} Badge Unlocked!`, b.name);
         if (b.id === 'streak7' || b.id === 'reviews50') triggerConfetti();
@@ -2046,6 +2071,7 @@ function recordGameReview(restaurantId, dishName, hasPhoto) {
 
   const baseXP = hasPhoto ? XP.reviewWithPhoto : XP.review;
   awardXP(baseXP, hasPhoto ? 'Review + photo' : 'Review submitted', isPioneer, hasPhoto);
+  saveGameState();
 }
 
 // ── UI HELPERS ──
