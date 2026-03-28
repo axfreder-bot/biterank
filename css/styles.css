@@ -858,3 +858,35 @@ section{padding:18px 14px;}
   border-color: var(--accent);
   color: var(--accent);
 }
+
+/* ── SHARE BUTTON STYLES ── */
+.share-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── URL HASH ROUTING HELPERS ── */
+/* Smooth transitions when switching views */
+.view {
+  transition: opacity 0.2s ease;
+}
+
+/* Loading state for async route loading */
+.route-loading {
+  opacity: 0.5;
+  pointer-events: none;
+}

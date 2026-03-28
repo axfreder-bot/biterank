@@ -3917,3 +3917,193 @@ function closeSwipeAndBrowse() {
   // Scroll to cuisine section
   document.querySelector('.cats-scroll').scrollIntoView({ behavior: 'smooth' });
 }
+
+// ═══════════════════════════════════════════════
+//  HASH-BASED ROUTING - SHAREABLE URLs
+// ═══════════════════════════════════════════════
+
+// Parse hash and route accordingly
+function handleHashRoute() {
+  const hash = window.location.hash.slice(1); // Remove #
+  if (!hash) return;
+  
+  const parts = hash.split('/').filter(Boolean);
+  if (parts.length === 0) return;
+  
+  const [type, ...params] = parts;
+  
+  switch(type) {
+    case 'restaurant':
+      if (params[0]) {
+        const restId = decodeURIComponent(params[0]);
+        openDishByHash(restId);
+      }
+      break;
+      
+    case 'city':
+      if (params[0]) {
+        const cityKey = decodeURIComponent(params[0]);
+        if (CITIES[cityKey]) {
+          selectCityTile(cityKey);
+        }
+      }
+      break;
+      
+    case 'search':
+      if (params[0]) {
+        const query = decodeURIComponent(params[0]);
+        // Wait for location to be set, then search
+        if (userLoc) {
+          quickSearch(query);
+        } else {
+          // Store pending search
+          window._pendingSearch = query;
+          showToast('Set your location to search');
+          openLocPicker();
+        }
+      }
+      break;
+      
+    case 'dish':
+      if (params[0]) {
+        const dish = decodeURIComponent(params[0]);
+        quickSearch(dish);
+      }
+      break;
+  }
+}
+
+// Open restaurant by ID from hash
+async function openDishByHash(restaurantId) {
+  // Try to find in current results or fetch
+  if (!restaurantById.has(restaurantId)) {
+    // Need to fetch this restaurant
+    // For now, show loading and try to fetch from Google Places
+    showToast('Loading restaurant...');
+    // In a real implementation, you'd have an API endpoint to fetch by ID
+    goHome();
+    return;
+  }
+  
+  const restaurant = restaurantById.get(restaurantId);
+  if (restaurant) {
+    currentDish = restaurant;
+    openDish(restaurantId);
+  }
+}
+
+// Update URL hash when viewing content
+function updateHash(type, ...params) {
+  const encoded = params.map(p => encodeURIComponent(p));
+  window.location.hash = `/${type}/${encoded.join('/')}`;
+}
+
+// Clear hash when going home
+function clearHash() {
+  window.history.pushState('', document.title, window.location.pathname + window.location.search);
+}
+
+// Override existing functions to update hash
+
+// Override openDish to update hash
+const _originalOpenDish = openDish;
+openDish = function(id) {
+  updateHash('restaurant', id);
+  return _originalOpenDish(id);
+};
+
+// Override selectCityTile to update hash
+const _originalSelectCityTile = selectCityTile;
+selectCityTile = async function(key) {
+  updateHash('city', key);
+  return _originalSelectCityTile(key);
+};
+
+// Override quickSearch to update hash
+const _originalQuickSearch = quickSearch;
+quickSearch = function(q) {
+  updateHash('search', q);
+  return _originalQuickSearch(q);
+};
+
+// Override goHome to clear hash
+const _originalGoHome = goHome;
+goHome = function() {
+  clearHash();
+  return _originalGoHome();
+};
+
+// Listen for hash changes
+window.addEventListener('hashchange', handleHashRoute);
+
+// Listen for popstate (back/forward buttons)
+window.addEventListener('popstate', () => {
+  if (window.location.hash) {
+    handleHashRoute();
+  } else {
+    goHome();
+  }
+});
+
+// Check hash on initial load
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    handleHashRoute();
+  }, 1000); // Wait for auth and location init
+});
+
+// Share current view function (replaces the old one)
+function shareCurrentView() {
+  const url = window.location.href;
+  const text = getShareText();
+  
+  if (navigator.share) {
+    navigator.share({
+      title: 'BiteRank',
+      text: text,
+      url: url
+    }).catch(() => {
+      // User cancelled
+    });
+  } else {
+    // Fallback to clipboard
+    navigator.clipboard.writeText(url).then(() => {
+      showToast('Link copied to clipboard!');
+    }).catch(() => {
+      showToast('Could not copy link');
+    });
+  }
+}
+
+function getShareText() {
+  const hash = window.location.hash;
+  if (!hash) return 'Check out BiteRank - Skip the ambiance. Just the food.';
+  
+  const parts = hash.split('/').filter(Boolean);
+  const [type, ...params] = parts;
+  
+  switch(type) {
+    case 'restaurant':
+      return currentDish ? 
+        `Check out ${currentDish.name} on BiteRank` : 
+        'Check out this restaurant on BiteRank';
+    case 'city':
+      const cityKey = params[0];
+      return cityKey && CITIES[cityKey] ? 
+        `Explore ${CITIES[cityKey].name} on BiteRank` : 
+        'Explore restaurants on BiteRank';
+    case 'search':
+      return `Find ${decodeURIComponent(params[0])} near you on BiteRank`;
+    case 'dish':
+      return `Find the best ${decodeURIComponent(params[0])} on BiteRank`;
+    default:
+      return 'Check out BiteRank - Skip the ambiance. Just the food.';
+  }
+}
+
+// Add getShareableUrl function for components
+function getShareableUrl(type, ...params) {
+  const base = window.location.origin + window.location.pathname;
+  const encoded = params.map(p => encodeURIComponent(p)).join('/');
+  return `${base}#/${type}/${encoded}`;
+}
