@@ -1241,6 +1241,8 @@ async function openDish(id) {
     : `<div style="color:var(--muted);font-size:.85rem;padding:8px 0">No reviews yet. Be the first — and keep it about the food.</div>`;
 
   const websiteEl = r.website ? `<a href="${r.website}" target="_blank" style="color:var(--accent);font-size:.78rem;word-break:break-all">${r.website.replace(/^https?:\/\//,'')}</a>` : '—';
+  const orderUrl = `https://www.doordash.com/search?query=${encodeURIComponent(r.name)}&store_type=restaurant`;
+  const orderBtn = r.closed ? '' : `<a href="${orderUrl}" target="_blank" class="wr-btn" style="display:block;text-align:center;text-decoration:none;background:#FF3008;color:#fff;font-weight:600;font-size:.9rem;padding:13px;border-radius:12px;margin-top:14px;">🍔 Order on DoorDash</a>`;
 
   document.getElementById('dishSheet').innerHTML = `
     <div class="drag-handle"></div>
@@ -1259,6 +1261,7 @@ async function openDish(id) {
         <div class="info-cell"><div class="ic-label">Phone</div><div class="ic-val" style="font-size:.82rem">${r.phone||'—'}</div></div>
         <div class="info-cell"><div class="ic-label">Website</div><div class="ic-val">${websiteEl}</div></div>
       </div>
+      ${orderBtn}
       ${r.closed?`<div style="background:rgba(224,96,96,.1);border:1px solid rgba(224,96,96,.25);border-radius:10px;padding:10px 13px;font-size:.84rem;color:var(--red);margin-bottom:14px">⚠️ This restaurant appears to be permanently closed or no longer operating. It is excluded from rankings.</div>`:''}
       ${currentUser?renderCompletionBar(id):''}
       ${galleryHTML}
