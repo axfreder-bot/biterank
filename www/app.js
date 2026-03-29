@@ -1825,6 +1825,8 @@ async function onboardManual() {
 function setUser(u){
   const isNew = !currentUser;
   currentUser=u;
+  // Load game state from Firestore (merge with local cache)
+  loadGameStateFromFirestore(u.uid);
   // Check admin status then update UI
   checkAdminStatus(u.email).then(() => {
     loadSavedList();
@@ -1835,6 +1837,35 @@ function setUser(u){
     initUserLocation(u.uid, isNew);
     renderTrendingStrip();
   });
+}
+
+async function loadGameStateFromFirestore(uid) {
+  try {
+    const serverState = await window._fsLoadGameState(uid);
+    const localState = loadGameState();
+    // Prefer server state if it exists and is newer or equal
+    if (serverState) {
+      const merged = {
+        ...localState,
+        ...serverState,
+        // Server wins for all fields
+        xp: serverState.xp ?? localState?.xp ?? 0,
+        totalReviews: serverState.totalReviews ?? localState?.totalReviews ?? 0,
+        totalPhotos: serverState.totalPhotos ?? localState?.totalPhotos ?? 0,
+        pioneerCount: serverState.pioneerCount ?? localState?.pioneerCount ?? 0,
+        currentStreak: serverState.currentStreak ?? localState?.currentStreak ?? 0,
+        maxStreak: serverState.maxStreak ?? localState?.maxStreak ?? 0,
+        lastReviewDate: serverState.lastReviewDate ?? localState?.lastReviewDate ?? null,
+        earnedBadges: serverState.earnedBadges || localState?.earnedBadges || [],
+        fullCompletions: serverState.fullCompletions ?? localState?.fullCompletions ?? 0,
+        reviewedDishes: serverState.reviewedDishes || localState?.reviewedDishes || {},
+      };
+      gameState = merged;
+      saveGameState();
+    }
+  } catch(e) {
+    // Fall back to local
+  }
 }
 function updateHdrAvatar(){
   const h=document.getElementById('hdrRight');
@@ -1853,12 +1884,12 @@ async function signOut(){
 }
 function handleSignOut(){
   // Don't clear stored location — keep it for next login
+  // Keep local game state (it survives in localStorage)
   currentUser=null;
   userLoc=null;
   document.getElementById('locPillText').textContent='Set location';
   const bar=document.getElementById('homeRadiusBar');if(bar)bar.style.display='none';
   const ctx=document.getElementById('homeCtxBar');if(ctx)ctx.style.display='none';
-  gameState={xp:0,totalReviews:0,totalPhotos:0,pioneerCount:0,currentStreak:0,maxStreak:0,lastReviewDate:null,earnedBadges:[],fullCompletions:0,reviewedDishes:{}};
   const b=document.getElementById('levelBadge');if(b)b.style.display='none';
   updateHdrAvatar();renderProfile();goHome();showToast('Signed out.');
 }
@@ -1955,6 +1986,11 @@ function saveGameState() {
   try {
     localStorage.setItem(GAME_STATE_KEY, JSON.stringify(gameState));
   } catch(e) {}
+  updateWishlistCount();
+  // Sync to Firestore (non-blocking)
+  if (currentUser?.uid) {
+    window._fsSaveGameState(currentUser.uid, gameState).catch(() => {});
+  }
 }
 
 let gameState = loadGameState() || {

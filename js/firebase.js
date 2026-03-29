@@ -75,6 +75,20 @@ window._fsDeleteReview = (id) => deleteDoc(doc(db, 'reviews', id));
 window._fsFetchAllReviews = (lim=100) =>
   getDocs(query(collection(db, 'reviews'), orderBy('ts', 'desc'), limit(lim)));
 
+// Game state persistence
+window._fsSaveGameState = async (uid, state) => {
+  // Store in a subcollection keyed by uid
+  await setDoc(doc(db, 'gameStates', uid), {
+    ...state,
+    ts: serverTimestamp(),
+    _synced: true,
+  });
+};
+window._fsLoadGameState = async (uid) => {
+  const snap = await getDoc(doc(db, 'gameStates', uid));
+  return snap.exists() ? snap.data() : null;
+};
+
 // Expose auth functions to global scope for use in onclick handlers
 window._fbAuth = auth;
 window._fbSignInGoogle = async () => {
