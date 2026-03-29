@@ -992,3 +992,14 @@ section{padding:18px 14px;}
   opacity: 0.5;
   pointer-events: none;
 }
+
+/* ── USER PREFERENCES UI ── */
+select#prefHomeCity option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.pref-mode-btn.active {
+  border-color: var(--accent) !important;
+}
+

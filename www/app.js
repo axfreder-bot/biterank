@@ -151,6 +151,50 @@ let selectedStars = 0;
 let uploadedPhoto = null;
 let currentUser  = null;
 
+// ── USER PREFERENCES ── synced to Firestore
+const PREFS_KEY = 'biterank_prefs';
+const DEFAULT_PREFS = {
+  homeCity: null,         // e.g. 'seattle'
+  dietary: [],             // ['vegetarian', 'gluten-free', etc.]
+  cuisinePrefs: [],        // preferred cuisines
+  discoveryMode: 'swipe', // 'swipe' | 'search'
+  notifications: true,
+  darkMode: null,          // null = system, true = dark, false = light
+};
+
+function loadPrefs() {
+  try {
+    const raw = localStorage.getItem(PREFS_KEY);
+    return raw ? { ...DEFAULT_PREFS, ...JSON.parse(raw) } : { ...DEFAULT_PREFS };
+  } catch(e) { return { ...DEFAULT_PREFS }; }
+}
+function savePrefs() {
+  try {
+    localStorage.setItem(PREFS_KEY, JSON.stringify(userPrefs));
+  } catch(e) {}
+  if (currentUser?.uid) {
+    window._fsSaveUserPrefs(currentUser.uid, userPrefs).catch(() => {});
+  }
+}
+let userPrefs = loadPrefs();
+
+function loadPrefsFromFirestore(uid) {
+  window._fsLoadUserPrefs(uid).then(serverPrefs => {
+    if (serverPrefs && Object.keys(serverPrefs).length > 0) {
+      userPrefs = { ...DEFAULT_PREFS, ...serverPrefs };
+      savePrefs();
+      applyPrefs();
+    }
+  }).catch(() => {});
+}
+
+function applyPrefs() {
+  // Apply dietary filter to searches
+  if (userPrefs.dietary && userPrefs.dietary.length > 0) {
+    // Will be picked up in search queries
+  }
+}
+
 // ── WISHLIST ── persistent food list from swipes
 const WISHLIST_KEY = 'biterank_wishlist';
 function loadWishlist() {
@@ -1825,8 +1869,9 @@ async function onboardManual() {
 function setUser(u){
   const isNew = !currentUser;
   currentUser=u;
-  // Load game state from Firestore (merge with local cache)
+  // Load game state and preferences from Firestore
   loadGameStateFromFirestore(u.uid);
+  loadPrefsFromFirestore(u.uid);
   // Check admin status then update UI
   checkAdminStatus(u.email).then(() => {
     loadSavedList();
@@ -1917,6 +1962,8 @@ function renderProfile(){
   </div>
   <div class="prof-body">
     ${renderGameProfile()}
+    <div class="prof-sec" style="margin-top:18px">My Preferences</div>
+    ${renderPrefs()}
     <div class="prof-sec" style="margin-top:18px">My Reviews (${allRevs.length})</div>
     ${allRevs.length?allRevs.map(r=>`<div class="rev-mine" onclick="openDishById('${r.restId}')">
       <div style="display:flex;align-items:center;gap:9px;margin-bottom:5px">
@@ -1931,10 +1978,123 @@ function renderProfile(){
   </div>`;
 }
 
+const DIETARY_OPTIONS = [
+  { id: 'vegetarian', label: 'Vegetarian', emoji: '🥬' },
+  { id: 'vegan', label: 'Vegan', emoji: '🌱' },
+  { id: 'gluten-free', label: 'Gluten-Free', emoji: '🌾' },
+  { id: 'dairy-free', label: 'Dairy-Free', emoji: '🥛' },
+  { id: 'halal', label: 'Halal', emoji: '☪️' },
+  { id: 'kosher', label: 'Kosher', emoji: '✡️' },
+  { id: 'pescatarian', label: 'Pescatarian', emoji: '🐟' },
+  { id: 'keto', label: 'Keto', emoji: '🥑' },
+];
+
+const CUISINE_OPTIONS = [
+  { id: 'american', label: 'American' },
+  { id: 'mexican', label: 'Mexican' },
+  { id: 'italian', label: 'Italian' },
+  { id: 'chinese', label: 'Chinese' },
+  { id: 'japanese', label: 'Japanese' },
+  { id: 'indian', label: 'Indian' },
+  { id: 'thai', label: 'Thai' },
+  { id: 'vietnamese', label: 'Vietnamese' },
+  { id: 'korean', label: 'Korean' },
+  { id: 'mediterranean', label: 'Mediterranean' },
+  { id: 'french', label: 'French' },
+  { id: 'ethiopian', label: 'Ethiopian' },
+  { id: 'brazilian', label: 'Brazilian' },
+  { id: 'peruvian', label: 'Peruvian' },
+];
+
+const CITY_OPTIONS = Object.entries(CITIES).map(([key, val]) => ({
+  id: key,
+  label: `${val.emoji} ${val.name}`,
+}));
+
+function renderPrefs() {
+  return `
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <!-- Home City -->
+      <div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:6px">Home City</div>
+        <select id="prefHomeCity" onchange="updatePref('homeCity', this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:.9rem">
+          <option value="">— Not set —</option>
+          ${CITY_OPTIONS.map(c => `<option value="${c.id}" ${userPrefs.homeCity === c.id ? 'selected' : ''}>${c.label}</option>`).join('')}
+        </select>
+      </div>
+
+      <!-- Discovery Mode -->
+      <div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:6px">Discovery Mode</div>
+        <div style="display:flex;gap:8px">
+          <button id="prefModeSwipe" onclick="updatePref('discoveryMode','swipe')" class="pref-mode-btn ${userPrefs.discoveryMode === 'swipe' ? 'active' : ''}" style="flex:1;padding:10px;border-radius:8px;border:1px solid var(--border);background:${userPrefs.discoveryMode === 'swipe' ? 'var(--accent)' : 'transparent'};color:${userPrefs.discoveryMode === 'swipe' ? '#fff' : 'var(--text)'};font-size:.85rem;cursor:pointer;font-weight:600">🎴 Swipe</button>
+          <button id="prefModeSearch" onclick="updatePref('discoveryMode','search')" class="pref-mode-btn ${userPrefs.discoveryMode === 'search' ? 'active' : ''}" style="flex:1;padding:10px;border-radius:8px;border:1px solid var(--border);background:${userPrefs.discoveryMode === 'search' ? 'var(--accent)' : 'transparent'};color:${userPrefs.discoveryMode === 'search' ? '#fff' : 'var(--text)'};font-size:.85rem;cursor:pointer;font-weight:600">🔍 Search</button>
+        </div>
+      </div>
+
+      <!-- Dietary Restrictions -->
+      <div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:6px">Dietary Restrictions</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          ${DIETARY_OPTIONS.map(d => `
+            <button onclick="toggleDietary('${d.id}')" class="pref-tag ${userPrefs.dietary.includes(d.id) ? 'active' : ''}" style="padding:6px 12px;border-radius:20px;border:1px solid ${userPrefs.dietary.includes(d.id) ? 'var(--accent)' : 'var(--border)'};background:${userPrefs.dietary.includes(d.id) ? 'rgba(232,133,74,0.15)' : 'transparent'};color:${userPrefs.dietary.includes(d.id) ? 'var(--accent)' : 'var(--text)'};font-size:.8rem;cursor:pointer">${d.emoji} ${d.label}</button>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- Preferred Cuisines -->
+      <div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:6px">Favorite Cuisines</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          ${CUISINE_OPTIONS.map(c => `
+            <button onclick="toggleCuisinePref('${c.id}')" class="pref-tag ${userPrefs.cuisinePrefs.includes(c.id) ? 'active' : ''}" style="padding:6px 12px;border-radius:20px;border:1px solid ${userPrefs.cuisinePrefs.includes(c.id) ? 'var(--accent)' : 'var(--border)'};background:${userPrefs.cuisinePrefs.includes(c.id) ? 'rgba(232,133,74,0.15)' : 'transparent'};color:${userPrefs.cuisinePrefs.includes(c.id) ? 'var(--accent)' : 'var(--text)'};font-size:.8rem;cursor:pointer">${c.label}</button>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:600;font-size:.9rem">Notifications</div>
+          <div style="font-size:.78rem;color:var(--muted)">Streak reminders & new features</div>
+        </div>
+        <label style="position:relative;display:inline-block;width:48px;height:26px;cursor:pointer">
+          <input type="checkbox" id="prefNotif" onchange="updatePref('notifications', this.checked)" ${userPrefs.notifications ? 'checked' : ''} style="opacity:0;width:0;height:0">
+          <span style="position:absolute;inset:0;background:${userPrefs.notifications ? 'var(--accent)' : 'var(--border)'};border-radius:13px;transition:.3s"></span>
+          <span style="position:absolute;top:3px;left:${userPrefs.notifications ? '25px' : '3px'};width:20px;height:20px;background:#fff;border-radius:50%;transition:.3s"></span>
+        </label>
+      </div>
+    </div>
+  `;
+}
+
+function updatePref(key, value) {
+  userPrefs[key] = value;
+  savePrefs();
+  applyPrefs();
+  renderProfile();
+}
+
+function toggleDietary(id) {
+  const idx = userPrefs.dietary.indexOf(id);
+  if (idx === -1) userPrefs.dietary.push(id);
+  else userPrefs.dietary.splice(idx, 1);
+  savePrefs();
+  applyPrefs();
+  renderProfile();
+}
+
+function toggleCuisinePref(id) {
+  const idx = userPrefs.cuisinePrefs.indexOf(id);
+  if (idx === -1) userPrefs.cuisinePrefs.push(id);
+  else userPrefs.cuisinePrefs.splice(idx, 1);
+  savePrefs();
+  applyPrefs();
+  renderProfile();
+}
+
 function openDishById(id){const r=restaurantById.get(id);if(r){currentDish=r;openDish(id);}}
 function uploadAvatar(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{currentUser.avatarImg=ev.target.result;document.getElementById('pAv').innerHTML=`<img src="${ev.target.result}"/>`;updateHdrAvatar();showToast('✅ Avatar updated!');};reader.readAsDataURL(file);}
-
-// renderCard auto-registers via inline calls below
 
 // ═══════════════════════════════════════════════
 //  GAMIFICATION ENGINE

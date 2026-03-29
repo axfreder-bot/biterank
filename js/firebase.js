@@ -89,6 +89,19 @@ window._fsLoadGameState = async (uid) => {
   return snap.exists() ? snap.data() : null;
 };
 
+// User preferences
+window._fsSaveUserPrefs = async (uid, prefs) => {
+  await setDoc(doc(db, 'users', uid), {
+    ...prefs,
+    ts: serverTimestamp(),
+    _synced: true,
+  }, { merge: true }); // merge so we don't wipe unread fields
+};
+window._fsLoadUserPrefs = async (uid) => {
+  const snap = await getDoc(doc(db, 'users', uid));
+  return snap.exists() ? snap.data() : {};
+};
+
 // Expose auth functions to global scope for use in onclick handlers
 window._fbAuth = auth;
 window._fbSignInGoogle = async () => {
