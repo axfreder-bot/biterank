@@ -1,0 +1,10 @@
+# Cloudflare Pages ignore rules
+node_modules/workerd
+node_modules/.cache
+.git
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
