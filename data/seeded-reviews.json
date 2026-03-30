@@ -1366,5 +1366,1033 @@
       "source": "Gemini AI",
       "seeded": true
     }
+  ],
+  "seeded_gjusta": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Smoked Salmon Bowl",
+      "text": "Gjusta's smoked salmon is silky, perfectly salted, and paired with excellent sourdough and house-made schmears. The space is gorgeous — part bakery, part café, all Venice Beach institution. Come early; they sell out.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Avocado Toast",
+      "text": "The avo toast at Gjusta is a masterclass in simplicity — thick-cut sourdough, smashed avo,house-pickled onions, and sesame. Simple but executed at the highest level. Great with a latte.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_repeta": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Butter Croissant",
+      "text": "Repeta's croissant is what all croissants aspire to be — golden, flaky, buttery with a shattering crust and pillowy interior. Get there before 10am. Cash only, lines move fast.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Kouign-Amann",
+      "text": "The kouign-amann is caramelized perfection — crispy, caramelized exterior giving way to a soft, buttery center. It's almost too beautiful to eat. Almost.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_marisol_midcity": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Grilled Octopus",
+      "text": "Marisol's grilled octopus is tender with a perfect char, served over white bean purée and finished with a bright Meyer lemon dressing. Refined but not fussy. One of the best in LA.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Wood-Roasted Half Chicken",
+      "text": "The wood-roasted chicken is juicy, crispy-skinned, and comes with excellent roasted vegetables. Simple, satisfying, and done right. Great for sharing.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_hatchet_hall": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Wood-Fired Ribeye",
+      "text": "Hatchet Hall's 32-day dry-aged ribeye is a carnivore's dream — deeply flavored, buttery-tender, and kissed with smoke from the wood fire. Accompanied by an excellent raw bar. Reserve the chef's counter.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Fried Chicken Sandwich",
+      "text": "The FCS is a weekend legend — crispy thigh, house pickles, spicy honey, on a brioche bun. Messy, addictive, and worth the wait. Wash it down with a mezcal cocktail.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_ URIU": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Omakase",
+      "text": "URIU's omakase is a highlight of the Westside — impeccably sourced fish, generous cuts, andHideaki San's warm hospitality. The hamachi is transcendent. Pricey but worth every penny for a special occasion.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Chawanmushi",
+      "text": "Silky, savory egg custard with seasonal toppings. A delicate start to the omakase that showcases Japanese precision at its finest.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_fat_niece_creamery": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Almond Brulee",
+      "text": "Fat Chance's almond brulee is legendary — house-made almond milk-based ice cream with a torched caramelized sugar crust. The crunch, the creaminess, the toasted almond flavor — perfection.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Strawberry Mac",
+      "text": "Seasonal strawberry ice cream with macarons. Light, fruity, and surprisingly refreshing. Only available when strawberries are in season — follow them on Instagram to know when.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_phreak_bbq": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Brisket",
+      "text": "Phreak Barbecue's brisket is Texas-style done LA proud — deep smoke ring, peppery bark, and a juice factor that's off the charts. Trimmed and wrapped to specification. Pick it up on Saturdays only.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pulled Pork",
+      "text": "The pulled pork is a pleasant surprise — slow-cooked, porky, with a tangy Carolina-style vinegar slaw. Less famous than the brisket but arguably more exciting.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_jua": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Omakase",
+      "text": "Jua's Korean-influenced omakase is unlike anything else in LA — DJ in the kitchen, family-style spreads, and dishes like bosari uni congee and fried chicken with gochujang. It's a whole experience, not just dinner.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Braised Short Rib",
+      "text": "The braised short rib is Korea meets France — fall-apart tender, rich, with a depth that comes from 48-hour sous vide. Served with lotus rice and kimchi that actually ferments properly.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_woodcat_cafe": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Brown Butter Latte",
+      "text": "Woodcat's brown butter latte is caffeine and comfort in a cup — nutty, slightly sweet, with excellent espresso. The café itself is gorgeous — Japanese-farmhouse vibes, very zen.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Miso Butter Toast",
+      "text": "White miso butter on thick-cut sourdough with seasonal toppings. Sweet, salty, umami. Simple concept, executed beautifully. Pairs perfectly with any of their specialty drinks.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_oda_isla": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Ceviche del Pacífico",
+      "text": "Oda Isla's ceviche is bright, citrus-forward, and made with incredibly fresh fish flown in regularly. The clásico is perfection, but the leche de tigre is the real star — spicy, sour, and totally addictive.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Tostada de Atún",
+      "text": "Tuna tostada with aguachile, serrano, and micro cilantro. The balance of spice, acid, and umami is spot-on. The space is tiny — counter seating only, 86'd by 2pm most days.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_tartine_bakery": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Country Loaf",
+      "text": "Tartine's country loaf is the benchmark for San Francisco sourdough — crackling crust, open crumb, with a tangy, complex flavor. Arrive by 8am or join the line. Worth every minute of waiting.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Morning Bun",
+      "text": "The morning bun is SF street food royalty — croissant dough rolled in orange sugar and cinnamon, baked fresh. Crispy, flaky, with a burst of citrusy sweetness. Dangerously addictive.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Lobster Roll",
+      "text": "Seasonal lobster roll with tarragon aioli on a buttered brioche roll. Generous chunks of sweet lobster, dressed just enough. Only available in summer — follows their seasonal menu.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_swan_offering": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Roast Duck",
+      "text": "Swan Offering's roast duck is the best in the Bay Area — crisp skin, perfectly rendered fat, and meat that pulls apart like butter. Chinese roast techniques perfected over decades. Get the half duck.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Peking Duck",
+      "text": "The Peking duck is a multi-course experience — first the crispy skin with pancakes, then the meat stir-fried with vegetables. Expensive but unforgettable. Call ahead.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_liholiho_yacht_club": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Cantonese Lobster",
+      "text": "Liholiho's Cantonese lobster is legendary — buttery lobster tail, egg fried rice, and heads-on prawns in a clay pot. Messy, pungent, totally addictive. One of those dishes that lives in your head for years.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Miso Wings",
+      "text": "The miso wings are a UMAMI BOMB — deep-fried, sauced, topped with bonito. Messy, sticky, and completely irreplaceable. One of the best wings in the city, SF or otherwise.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Oxtail Fried Rice",
+      "text": "Braised oxtail stirred into egg fried rice with a fried egg on top. Rich, unctuous, with the kind of depth that comes from slow braising. Messy to eat, impossible to stop.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_artesiano": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Squid Ink Paella",
+      "text": "Artesiano's squid ink paella is jet black, dramatic, and deeply savory — cuttlefish ink giving it an intense seafood depth. The socarrat is perfectly crispy. One of the best paellas outside of Spain.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Octopus a la Plancha",
+      "text": "Grilled octopus with fingerling potatoes, smoked paprika, and olive oil. The octopus is tender with a nice char, the potatoes add substance. Solid, satisfying, and consistently excellent.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_zuni_cafe": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Roast Chicken for Two",
+      "text": "Zuni's legendary roast chicken is a San Francisco institution — salt-cured, brick-roasted, served with a phenomenal bread salad and bitter greens. The chicken is juicy, the skin is crisp, the drippings are magical.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Caesar Salad",
+      "text": "The Caesar at Zuni is classic and beloved — Romesco, anchovy, good Parmesan. Sometimes over-marinated but when it's on, it's on. The Caesar is the salad against which all others are measured.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_starbelly": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Smoked Trout Dip",
+      "text": "Starbelly's smoked trout dip is creamy, smoky, and comes with excellent house chips. A perfect bar snack. The space is fun, the cocktails are solid, and the trout dip keeps you coming back.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Wood-Fired Mussels",
+      "text": "Mussels in a white wine, garlic, and herb broth with grilled bread. Simple, perfectly executed, and the broth is so good you'll want to drink it with a spoon.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_the_burger": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "The Burger",
+      "text": "Richie Seban's burger is SF's best — 8oz dry-aged wagyu, American cheese, house pickles, special sauce, on a brioche bun. The patty is umami-rich and the jus makes it messily excellent.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Steak Frites",
+      "text": "Dry-aged ribeye with frites and béarnaise. Simple, French-bistro perfect. The frites are thin and crispy, the béarnaise is silky. Not fancy, but everything you want.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_calabash": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Jambalaya",
+      "text": "Calabash's jambalaya is the real deal — deeply flavored, smoky, with the holy trinity and andouille sausage. One pot, soul-satisfying. Feeds two easily. Order ahead, it's made in batches.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Fried Catfish",
+      "text": "Crispy, cornmeal-crusted catfish with creole remoulade. The fish is fresh, the coating is perfect, and the remoulade adds just the right amount of zip. A New Orleans moment in SF.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_hog_oyster": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Killer Fried Chicken",
+      "text": "Hog & Oyster's fried chicken is legendary — ultra-crispy, buttermilk-brined, with a side of oyster stew that seems like it shouldn't work but absolutely does. Southern cooking done with SF precision.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Oyster Stew",
+      "text": "Creamy, briny, with a hint of sherry. A small cup that hits hard on a foggy San Francisco evening. Pairs perfectly with the fried chicken.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_nopalito": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Pozole Rojo",
+      "text": "Nopalito's pozole is a Saturday morning tradition for regulars — rich, deeply flavored hominy soup with pork, shredded cabbage, radish, oregano, and dried chili. Slow-cooked for hours, possibly days.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Lamb Birria",
+      "text": "Birria lamb with consomé for dipping tortillas. The lamb is fall-apart tender, the consomé is rich and complex. Messy and satisfying. Get extra tortillas.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_franklin_bbq": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Brisket",
+      "text": "Franklin's brisket is the reason Texas BBQ exists — 16-hour smoke, perfect pepper bark, slice that melts on your tongue. The most famous BBQ in the world, and somehow still worth the wait. Bring a lawn chair.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pulled Pork",
+      "text": "Franklin's pulled pork doesn't get the glory but it should — pork shoulder, smoked low and slow, with a tangy vinegar slaw that cuts right through. My personal favorite.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Sausage",
+      "text": "House-made sausage links with a great snap and solid spice. The sausage gets overshadowed by the brisket but it's consistently excellent. Get a few links.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_lamberts_downtown": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Smoked Beef Ribs",
+      "text": "Lambert's big beef ribs are a carnivore's dream — massive, meaty, with an incredible bark and smoke ring. The size alone is worth the Instagram. The flavor keeps you coming back.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Mac and Cheese",
+      "text": "Lambert's mac and cheese is properly baked — creamy, with a crunchy top, and plenty of cheese. A solid side that holds its own against the smoked meats.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_vaULTS": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Smoked Half Chicken",
+      "text": "VAULT's smoked half chicken is underrated — juicy, with a perfect bark and smoke. Not as famous as their links but arguably better. The jalapeño cheese sausage is also exceptional.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Jalapeño Cheese Sausage",
+      "text": "VAULT's jalapeño cheese sausage is a revelation — coarse grind, real cheese chunks, fresh jalapeño heat. Better than most dedicated sausage places. Get two.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_st_elmo_brewery": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Burnt Ends",
+      "text": "St. Elmo's burnt ends are nuggets of beefy, barky, caramelized perfection. Small, precious, and aggressively smoky. One of the most sought-after items in Austin BBQ.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Smoked Turkey",
+      "text": "The turkey breast is moist, well-smoked, and comes with an excellent jalapeño凑 béarnaise. A lighter option that doesn't compromise on quality.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_verdegreen": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Duck Confit",
+      "text": "Verde's duck confit is French technique meets Texas ingredients — crispy skin, tender meat, on a bed of excellent greens with a sherry vinaigrette. Light, bright, and totally satisfying.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Braised Short Rib",
+      "text": "Braised short rib with green chile polenta and gremolata. Rich, hearty, with a New Mexico green chile kick. The polenta is creamy, the gremolata adds brightness.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pretty_cool_ice_cream": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Horchata Ice Cream",
+      "text": "Pretty Cool's horchata ice cream is a Tex-Mex dream — cinnamon, rice milk, and just enough vanilla to tie it together. Silky, spiced, and incredibly refreshing. Some of the best ice cream in Austin.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Strawberry Basil",
+      "text": "Seasonal strawberry basil with local strawberries. Light, herby, not too sweet. The basil is subtle but present, making this more interesting than your average fruit ice cream.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_uchiko_austin": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Omakase",
+      "text": "Uchiko's omakase is the best in Austin — beautiful fish, thoughtful presentations, and a sake program that's actually interesting. Not cheap, but every course is a small celebration.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Miso-Black Cod",
+      "text": "The miso-black cod is legendary for good reason — rich, buttery, with the sweet-salty miso glaze caramelized to perfection. One of the best preparations of this fish in the country.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Fried Chicken",
+      "text": "Uchiko's fried chicken is unexpectedly excellent — karaage-style, with shiso aioli and house-made pickles. One of the best non-BBQ proteins in Austin.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_contigo_ranch": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Smoked Beef Cheek",
+      "text": "Contigo Ranch's smoked beef cheek is an underdog favorite — deeply smoked, rich, and tender enough to cut with a fork. The quality of the beef really shines through.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Smoked Wings",
+      "text": "Smoked wings with jalapeño honey and ranch. The smoke gives them depth that fried wings lack. Spicy, sweet, and messy. One of the best wings in Austin.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_ la_barba": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Smoked Pastrami",
+      "text": "La Barba's smoked pastrami is a beautiful thing — house-brined, heavily peppered, and smoked until impossibly tender. Sliced thin, piled high. Way better than it needs to be.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Brisket Reuben",
+      "text": "The brisket Reuben with house-made Thousand Island and rye bread. A perfect use of leftover brisket. Heavy, messy, and completely satisfying.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_jewboy_burgers": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "The Matzo Ball",
+      "text": "Jewboy's matzo ball is legendary — dense, savory, with a schmaltz kick. The soup itself is clear, rich, with excellent hand-rolled noodles. The ultimate Austin comfort food.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Pastrami Reuben",
+      "text": "House-made pastrami on rye with sauerkraut and Russian dressing. The pastrami is juicy and well-spiced, the sauerkraut adds crunch, the dressing ties it together.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_ivys_dumpling": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Soup Dumplings",
+      "text": "Ivy's soup dumplings in Flushing are NYC's best — thin-skinned, broth-filled, and incredibly savory. Get the pork and crab, add the black vinegar. This is the reason people take the 7 train to Queens.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Scallion Noodles",
+      "text": "Hand-pulled noodles with scallion oil and soy. Simple, wok-hei, and deeply comforting. The kind of dish that makes you want to stay for another plate.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_ha_pei": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Pepper Steak",
+      "text": "Haand's pepper steak is a must — rich, savory, with a creamy peppercorn sauce that's dangerously good. The quality of the beef is exceptional for a sit-down. Come hungry.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Crab Crispy",
+      "text": "Crispy crab rangoon with house sweet chili sauce. More filling than expected, with real crab flavor. A solid appetizer that disappears fast.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_crown_shy": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Dry-Aged Ribeye",
+      "text": "Crown Shy's dry-aged ribeye is NYC fine dining done right — not pretentious, with a serious wine program and impeccable service. The beef is aged to perfection, the butter is house-made.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Potato Agnolotti",
+      "text": "Potato agnolotti with brown butter and sage. Pillowy pasta, rich filling, nutty butter sauce. Simple Italian preparation at its absolute finest.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_kang_ho_dong_ja": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Beef Short Rib",
+      "text": "Kang Ho Dong's beef short rib is the flagship — marinated in soy, sesame, pear, and garlic, then grilled to caramelized perfection. A NYC institution for good reason.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Spicy Pork Neck Stew",
+      "text": "Spicy pork neck stew with kimchi and glass noodles. The spice builds slowly, the pork neck is collagen-rich and tender. A great share dish for two.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_noreet_thai": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Khao Soi",
+      "text": "Noreet's Khao Soi is legendary in Chiang Mai style — rich coconut curry broth with egg noodles, chicken thigh, and crispy shallots. The fried shallots are addictive.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Papaya Salad",
+      "text": "Green papaya salad with dried shrimp, peanuts, tomato, and a lime-chili dressing. Crunchy, spicy, sour. A perfect balance of Thai flavors.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_avant_garden": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Vegetable Tasting",
+      "text": "Avant Garden's vegetable tasting is a revelation — every course proves that plants can be the star. The smoked carrot and romesco course is particularly memorable.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Mushroom Soup",
+      "text": "Silky wild mushroom soup with truffle oil and crispy shallots. Rich, earthy, and satisfying even for committed carnivores. A standout in the East Village.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_katzs_deli": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Pastrami Sandwich",
+      "text": "Katz's pastrami is a New York institution — hand-sliced, hot, with spicy mustard on rye. Get the full pastrami, not the Royale. The Ephron scene is real. Don't lose your ticket.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Corned Beef",
+      "text": "Katz's corned beef is salt-cured to perfection — thick-sliced, tender, with the classic caraway flavor. A solid alternative to the pastrami. Comes with a half-sour pickle.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_russ_daughters": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Super Heebster",
+      "text": "The Super Heebster is a bagel piled high with sturgeon, wasabi roe, horseradish cream cheese, and dill. A Lower East Side institution. Smoked fish at its most gloriously excess.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Classic Nova",
+      "text": "Classic nova lox with cream cheese on a bagel. The fish is silky, the cream cheese is thick, the bagel is properly toasted. Breakfast perfection.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_fuku": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Fried Chicken Sandwich",
+      "text": "Fuku's fried chicken sandwich is David Chang's masterpiece — crispy chicken, spicy mayo, and a brioche bun. Simple, addictive, and the spicy version has real heat.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": " Seasoned Fries",
+      "text": "Fuku fries with the duck fat seasoning. Crispy, salty, with a hint of funk from the duck fat. Add the spicy mayo for dipping and you won't stop until the container is empty.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_pete_zaaz": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "Za'atar Fries",
+      "text": "Pete Zazu's za'atar fries are the best fries in the East Village — crispy, tossed in za'atar and sumac, with tahini and amba. Middle Eastern spice, zero pretense.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Shawarma Plate",
+      "text": "Lamb and chicken shawarma with hummus, pita, and amba. The meat is well-spiced, the hummus is silky, the amba adds mango tang. A satisfying, filling meal.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
+  ],
+  "seeded_grams_ burger": [
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 5,
+      "dishName": "The Gram's Burger",
+      "text": "Grams' burger is old-school done right — double smashed patties, American cheese, special sauce, on a potato bun. The patties are thin, crispy-edged, and mega savory.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    },
+    {
+      "user": "Community",
+      "av": "C",
+      "date": "Community sourced",
+      "rating": 4,
+      "dishName": "Grilled Cheese",
+      "text": "Grilled cheese with American cheese and bread and butter pickles. Simple, nostalgic, with the perfect ratio of crispy bread to melted cheese. Worth the wait in line.",
+      "photo": null,
+      "source": "Atlas AI",
+      "seeded": true
+    }
   ]
 }
