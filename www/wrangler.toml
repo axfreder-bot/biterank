@@ -1,3 +1,4 @@
 name = "biterank"
+exclude = ["node_modules/workerd/**"]
 compatibility_flags = ["nodejs_compat"]
 account_id = "1152f8823947e8025da22f3927103cf3"
