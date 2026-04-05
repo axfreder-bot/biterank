@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0f0e0c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>BiteRank — Find the Best Dishes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #e8854a;
+      --accent2: #c96a3a;
+      --bg: #0f0e0c;
+      --surface: #1a1917;
+      --card: #222120;
+      --border: #2e2c2a;
+      --text: #f5f2ed;
+      --muted: #7a7674;
+      --green: #6abf8a;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100dvh;
+      overflow: hidden;
+      touch-action: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* HEADER */
+    .swipe-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(15,14,12,0.95) 0%, rgba(15,14,12,0) 100%);
+    }
+    .swipe-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .swipe-logo span { color: var(--accent2); font-style: italic; }
+    .back-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .back-btn.visible { opacity: 1; pointer-events: auto; }
+    .back-btn:active { transform: scale(0.93); }
+
+    /* CARD STACK */
+    .stack-container {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px 100px;
+    }
+
+    .swipe-card {
+      position: absolute;
+      width: calc(100% - 40px);
+      max-width: 380px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px 24px 28px;
+      text-align: center;
+      cursor: grab;
+      transition: transform 0.1s, box-shadow 0.2s;
+      will-change: transform;
+      touch-action: pan-y;
+    }
+
+    .swipe-card:active { cursor: grabbing; }
+
+    .card-emoji {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      display: block;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .card-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .meta-value {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+    .meta-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card-dishes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    .dish-tag {
+      font-size: 0.72rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 4px 10px;
+      border-radius: 10px;
+    }
+
+    /* SWIPE HINTS */
+    .swipe-hints {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      margin-top: 16px;
+    }
+    .hint {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .hint-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+    .hint.left .hint-icon { color: #e85a5a; }
+    .hint.right .hint-icon { color: var(--green); }
+
+    /* INDICATOR */
+    .level-indicator {
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      gap: 4px;
+    }
+    .level-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: all 0.3s;
+    }
+    .level-dot.active {
+      background: var(--accent);
+      width: 18px;
+      border-radius: 3px;
+    }
+
+    /* RESULT LIST */
+    .result-list {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 200;
+      overflow-y: auto;
+      padding: 80px 16px 100px;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .result-list.visible { transform: translateX(0); }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .result-back {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .result-info { flex: 1; }
+    .result-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .result-count { font-size: 0.8rem; color: var(--muted); }
+
+    .resto-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .resto-card:active {
+      transform: scale(0.98);
+      border-color: var(--accent);
+    }
+    .resto-top {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .resto-thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+    .resto-info { flex: 1; min-width: 0; }
+    .resto-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .resto-cuisine { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+    .resto-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .resto-stars { color: var(--accent2); font-size: 0.8rem; }
+    .resto-score { font-weight: 700; font-size: 0.9rem; color: var(--accent2); margin-left: 2px; }
+    .resto-reviews { font-size: 0.72rem; color: var(--muted); }
+    .resto-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+    .resto-dist {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--green);
+      background: rgba(106,191,138,0.1);
+      padding: 2px 8px;
+      border-radius: 8px;
+    }
+    .hot-badge {
+      font-size: 0.62rem;
+      font-weight: 700;
+      background: rgba(232,133,74,0.15);
+      color: var(--accent);
+      padding: 2px 7px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      padding: 8px 0;
+      padding-bottom: calc(8px + env(safe-area-inset-bottom));
+      z-index: 300;
+    }
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      padding: 6px 0;
+      color: var(--muted);
+      font-size: 0.65rem;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: color 0.2s;
+    }
+    .nav-item.active { color: var(--accent); }
+    .nav-item span:first-child { font-size: 1.3rem; }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: all 0.3s;
+      z-index: 500;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* LOCATION PICKER */
+    .location-bar {
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .location-bar:active { border-color: var(--accent); }
+    .location-bar span:first-child { font-size: 0.75rem; }
+
+    .loc-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      background: rgba(15,14,12,0.85);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .loc-modal.visible { opacity: 1; pointer-events: auto; }
+    .loc-sheet {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px 24px 0 0;
+      padding: 24px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 70vh;
+      overflow-y: auto;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .loc-modal.visible .loc-sheet { transform: translateY(0); }
+    .loc-sheet-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .loc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .loc-chip {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .loc-chip:active { border-color: var(--accent); }
+    .loc-chip.selected { border-color: var(--accent); background: rgba(232,133,74,0.1); }
+    .loc-chip-emoji { font-size: 1.6rem; display: block; margin-bottom: 4px; }
+    .loc-chip-name { font-size: 0.78rem; font-weight: 600; }
+    .loc-chip-count { font-size: 0.65rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="swipe-header">
+  <button class="back-btn" id="backBtn" onclick="goBack()">←</button>
+  <div class="swipe-logo">Bite<span>Rank</span></div>
+  <div style="width:36px"></div>
+</div>
+
+<!-- LOCATION PICKER -->
+<div class="location-bar" id="locationBar" onclick="openLocPicker()">
+  <span>📍</span>
+  <span id="locText">Portland</span>
+  <span>▾</span>
+</div>
+
+<!-- LEVEL INDICATOR -->
+<div class="level-indicator" id="levelIndicator"></div>
+
+<!-- CARD STACK -->
+<div class="stack-container" id="stack"></div>
+
+<!-- SWIPE HINTS -->
+<div class="swipe-hints" id="swipeHints">
+  <div class="hint left">
+    <div class="hint-icon">←</div>
+    <span>See ranked list</span>
+  </div>
+  <div class="hint right">
+    <span>Deeper →</span>
+    <div class="hint-icon">→</div>
+  </div>
+</div>
+
+<!-- RESULT LIST -->
+<div class="result-list" id="resultList">
+  <div class="result-header">
+    <div class="result-back" onclick="closeResults()">←</div>
+    <div class="result-info">
+      <div class="result-title" id="resultTitle">Tacos in Portland</div>
+      <div class="result-count" id="resultCount">12 restaurants</div>
+    </div>
+  </div>
+  <div id="resultCards"></div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-item active" onclick="navTo('home')">
+    <span>🔍</span> Search
+  </button>
+  <button class="nav-item" onclick="navTo('map')">
+    <span>🗺️</span> Map
+  </button>
+  <button class="nav-item" onclick="navTo('profile')">
+    <span>👤</span> Profile
+  </button>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- LOCATION MODAL -->
+<div class="loc-modal" id="locModal">
+  <div class="loc-sheet">
+    <div class="loc-sheet-title">📍 Choose Location</div>
+    <div class="loc-grid" id="locGrid"></div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────
+const DATA = {
+  mealOccasions: [
+    {
+      id: 'breakfast', name: 'Breakfast', emoji: '🍳',
+      subtitle: '7am – 11am', count: '843 spots',
+      dishes: [
+        { id: 'eggs-benny', name: 'Eggs Benedict', emoji: '🍳', count: 89, avgRating: 4.7 },
+        { id: 'pancakes', name: 'Pancakes', emoji: '🥞', count: 134, avgRating: 4.5 },
+        { id: 'avocado-toast', name: 'Avocado Toast', emoji: '🥑', count: 201, avgRating: 4.3 },
+        { id: 'acai-bowl', name: 'Acai Bowl', emoji: '🍇', count: 67, avgRating: 4.6 },
+        { id: 'omelette', name: 'Omelette', emoji: '🍳', count: 78, avgRating: 4.4 },
+      ]
+    },
+    {
+      id: 'brunch', name: 'Brunch', emoji: '🥞',
+      subtitle: '10am – 3pm', count: '1,204 spots',
+      dishes: [
+        { id: 'chicken-waffles', name: 'Chicken & Waffles', emoji: '🍗', count: 187, avgRating: 4.8 },
+        { id: 'benedict', name: 'Eggs Benedict', emoji: '🍳', count: 143, avgRating: 4.7 },
+        { id: 'french-toast', name: 'French Toast', emoji: '🍞', count: 112, avgRating: 4.5 },
+        { id: 'bottomless', name: 'Bottomless Mimosas', emoji: '🍾', count: 95, avgRating: 4.4 },
+        { id: 'breakfast-burrito', name: 'Breakfast Burrito', emoji: '🌯', count: 159, avgRating: 4.6 },
+      ]
+    },
+    {
+      id: 'lunch', name: 'Lunch', emoji: '🥪',
+      subtitle: '11am – 2pm', count: '2,847 spots',
+      dishes: [
+        { id: 'burger', name: 'Burger', emoji: '🍔', count: 445, avgRating: 4.5 },
+        { id: 'sandwich', name: 'Sandwich / Sub', emoji: '🥪', count: 389, avgRating: 4.3 },
+        { id: 'poke', name: 'Poke Bowl', emoji: '🥗', count: 223, avgRating: 4.7 },
+        { id: 'ramen', name: 'Ramen', emoji: '🍜', count: 267, avgRating: 4.6 },
+        { id: 'tacos', name: 'Tacos', emoji: '🌮', count: 312, avgRating: 4.8 },
+      ]
+    },
+    {
+      id: 'dinner', name: 'Dinner', emoji: '🍝',
+      subtitle: '5pm – 10pm', count: '3,621 spots',
+      dishes: [
+        { id: 'steak', name: 'Steakhouse', emoji: '🥩', count: 234, avgRating: 4.8 },
+        { id: 'pizza', name: 'Pizza', emoji: '🍕', count: 445, avgRating: 4.5 },
+        { id: 'sushi', name: 'Sushi', emoji: '🍣', count: 389, avgRating: 4.7 },
+        { id: 'pasta', name: 'Pasta', emoji: '🍝', count: 278, avgRating: 4.6 },
+        { id: 'thai', name: 'Thai', emoji: '🍛', count: 198, avgRating: 4.4 },
+      ]
+    },
+    {
+      id: 'dessert', name: 'Dessert', emoji: '🍰',
+      subtitle: 'All day', count: '892 spots',
+      dishes: [
+        { id: 'cheesecake', name: 'Cheesecake', emoji: '🍰', count: 134, avgRating: 4.8 },
+        { id: 'ice-cream', name: 'Ice Cream', emoji: '🍦', count: 267, avgRating: 4.5 },
+        { id: 'chocolate', name: 'Chocolate Cake', emoji: '🍫', count: 189, avgRating: 4.7 },
+        { id: 'donuts', name: 'Donuts', emoji: '🍩', count: 145, avgRating: 4.6 },
+        { id: 'milkshake', name: 'Milkshake', emoji: '🥛', count: 98, avgRating: 4.4 },
+      ]
+    },
+    {
+      id: 'snack', name: 'Snack', emoji: '🍿',
+      subtitle: 'Anytime', count: '1,456 spots',
+      dishes: [
+        { id: 'fries', name: 'Fries', emoji: '🍟', count: 334, avgRating: 4.4 },
+        { id: 'wings', name: 'Wings', emoji: '🍗', count: 289, avgRating: 4.7 },
+        { id: 'nachos', name: 'Nachos', emoji: '🌮', count: 198, avgRating: 4.5 },
+        { id: 'pretzel', name: 'Pretzel', emoji: '🥨', count: 87, avgRating: 4.3 },
+        { id: 'mozzarella', name: 'Mozzarella Sticks', emoji: '🧀', count: 112, avgRating: 4.6 },
+      ]
+    },
+  ]
+};
+
+const CITIES = [
+  { id: 'portland', name: 'Portland', emoji: '🌲', count: 47 },
+  { id: 'seattle', name: 'Seattle', emoji: '🗼', count: 63 },
+  { id: 'sf', name: 'San Francisco', emoji: '🌉', count: 89 },
+  { id: 'la', name: 'Los Angeles', emoji: '🤙', count: 124 },
+  { id: 'nyc', name: 'New York', emoji: '🗽', count: 156 },
+  { id: 'chicago', name: 'Chicago', emoji: '🌭', count: 71 },
+];
+
+// Mock restaurant data keyed by "city-dish"
+function getRestaurants(cityId, dishId, parentName) {
+  const base = [
+    { name: 'The ' + parentName + ' House', cuisine: 'American', emoji: '🍽️', rating: 4.8, count: 234, dist: '0.3 mi', hot: true },
+    { name: parentName + ' Expert', cuisine: 'Modern', emoji: '⭐', rating: 4.6, count: 189, dist: '0.5 mi', hot: false },
+    { name: 'Local ' + parentName + ' Co.', cuisine: 'Casual', emoji: '🏠', rating: 4.5, count: 312, dist: '0.8 mi', hot: false },
+    { name: parentName + ' District', cuisine: 'Gastro', emoji: '🍴', rating: 4.4, count: 156, dist: '1.1 mi', hot: false },
+    { name: 'The ' + parentName + ' Lab', cuisine: 'Creative', emoji: '🧪', rating: 4.3, count: 98, dist: '1.4 mi', hot: false },
+    { name: parentName + ' Masters', cuisine: 'Upscale', emoji: '👨‍🍳', rating: 4.2, count: 77, dist: '1.8 mi', hot: false },
+  ];
+  return base;
+}
+
+// ── STATE ──────────────────────────────────────────────────────────────
+let currentCity = CITIES[0];
+let stack = []; // stack of {type, data, cards}
+let cardStack = []; // DOM elements in the stack
+const THROW_THRESHOLD = 100; // px to trigger swipe
+
+// ── INIT ────────────────────────────────────────────────────────────────
+function init() {
+  renderLocationPicker();
+  renderStack();
+  setupGestures();
+}
+
+function renderLocationPicker() {
+  const grid = document.getElementById('locGrid');
+  grid.innerHTML = CITIES.map(c => `
+    <div class="loc-chip ${c.id === currentCity.id ? 'selected' : ''}" data-id="${c.id}">
+      <span class="loc-chip-emoji">${c.emoji}</span>
+      <div class="loc-chip-name">${c.name}</div>
+      <div class="loc-chip-count">${c.count} restaurants</div>
+    </div>
+  `).join('');
+  grid.querySelectorAll('.loc-chip').forEach(chip => {
+    chip.addEventListener('click', () => selectCity(chip.dataset.id));
+  });
+  document.getElementById('locText').textContent = currentCity.name;
+}
+
+function selectCity(id) {
+  currentCity = CITIES.find(c => c.id === id);
+  document.getElementById('locText').textContent = currentCity.name;
+  grid.querySelectorAll('.loc-chip').forEach(c => c.classList.remove('selected'));
+  document.querySelector(`.loc-chip[data-id="${id}"]`).classList.add('selected');
+  closeLocPicker();
+  // Reset to meal occasions
+  stack = [];
+  renderStack();
+}
+
+// ── STACK RENDERING ────────────────────────────────────────────────────
+function renderStack() {
+  const container = document.getElementById('stack');
+  container.innerHTML = '';
+  cardStack = [];
+
+  const level = stack.length; // 0 = meal occasions
+
+  // Update level indicator
+  const indicator = document.getElementById('levelIndicator');
+  indicator.innerHTML = [0,1,2].map((_, i) =>
+    `<div class="level-dot ${i === level ? 'active' : ''}"></div>`
+  ).join('');
+
+  // Update back button
+  document.getElementById('backBtn').classList.toggle('visible', level > 0);
+  document.getElementById('backBtn').textContent = '←';
+
+  // Determine what cards to show
+  let items = [];
+  if (level === 0) {
+    items = DATA.mealOccasions;
+  } else if (level === 1) {
+    items = stack[0].data.dishes;
+  }
+
+  // Build DOM cards (max 3 visible)
+  const showCount = Math.min(3, items.length);
+  for (let i = showCount - 1; i >= 0; i--) {
+    const item = items[i];
+    const isTop = i === showCount - 1;
+    const card = createCard(item, level);
+    if (!isTop) {
+      card.style.transform = `scale(${0.95 - i * 0.03}) translateY(${i * 8}px)`;
+      card.style.zIndex = i;
+      card.style.pointerEvents = 'none';
+    }
+    container.appendChild(card);
+    if (isTop) cardStack.push(card);
+  }
+
+  // Update swipe hints
+  const hints = document.getElementById('swipeHints');
+  if (level === 0) {
+    hints.innerHTML = `
+      <div class="hint left"><div class="hint-icon">←</div><span>See ranked list</span></div>
+      <div class="hint right"><span>Deeper →</span><div class="hint-icon">→</div></div>
+    `;
+  } else if (level === 1) {
+    hints.innerHTML = `
+      <div class="hint left"><div class="hint-icon">←</div><span>See ranked list</span></div>
+      <div class="hint right"><span>More dishes →</span><div class="hint-icon">→</div></div>
+    `;
+  }
+  hints.style.display = cardStack.length > 0 ? 'flex' : 'none';
+}
+
+function createCard(item, level) {
+  const card = document.createElement('div');
+  card.className = 'swipe-card';
+  card.style.zIndex = 10;
+
+  let html = '';
+
+  if (level === 0) {
+    // Meal occasion
+    html = `
+      <span class="card-emoji">${item.emoji}</span>
+      <div class="card-title">${item.name}</div>
+      <div class="card-subtitle">${item.subtitle}</div>
+      <div class="card-meta">
+        <div class="meta-item">
+          <span class="meta-value">${item.count}</span>
+          <span class="meta-label">Spots</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-value">${item.dishes.length}</span>
+          <span class="meta-label">Popular Dishes</span>
+        </div>
+      </div>
+      <div class="card-dishes">
+        ${item.dishes.slice(0,4).map(d => `<span class="dish-tag">${d.emoji} ${d.name}</span>`).join('')}
+      </div>
+    `;
+  } else if (level === 1) {
+    // Dish
+    html = `
+      <span class="card-emoji">${item.emoji}</span>
+      <div class="card-title">${item.name}</div>
+      <div class="card-subtitle">${item.count} restaurants near you</div>
+      <div class="card-meta">
+        <div class="meta-item">
+          <span class="meta-value">${item.avgRating.toFixed(1)}</span>
+          <span class="meta-label">Avg Dish Rating</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-value">${item.count}</span>
+          <span class="meta-label">Restaurants</span>
+        </div>
+      </div>
+    `;
+  }
+
+  card.innerHTML = html;
+  return card;
+}
+
+// ── GESTURES ────────────────────────────────────────────────────────────
+let startX = 0, startY = 0, currentX = 0, isDragging = false;
+
+function setupGestures() {
+  document.addEventListener('touchstart', onTouchStart, { passive: true });
+  document.addEventListener('touchmove', onTouchMove, { passive: true });
+  document.addEventListener('touchend', onTouchEnd, { passive: true });
+
+  // Mouse fallback
+  document.addEventListener('mousedown', onMouseDown);
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+}
+
+function onTouchStart(e) {
+  if (!cardStack.length) return;
+  const touch = e.touches[0];
+  startX = touch.clientX;
+  startY = touch.clientY;
+  isDragging = true;
+}
+
+function onTouchMove(e) {
+  if (!isDragging || !cardStack.length) return;
+  const touch = e.touches[0];
+  currentX = touch.clientX - startX;
+  const currentY = touch.clientY - startY;
+  applyTransform(currentX, currentY);
+}
+
+function onTouchEnd(e) {
+  if (!isDragging) return;
+  isDragging = false;
+  handleSwipe(currentX);
+  currentX = 0;
+}
+
+function onMouseDown(e) {
+  if (!cardStack.length) return;
+  startX = e.clientX;
+  startY = e.clientY;
+  isDragging = true;
+}
+
+function onMouseMove(e) {
+  if (!isDragging || !cardStack.length) return;
+  currentX = e.clientX - startX;
+  const currentY = e.clientY - startY;
+  applyTransform(currentX, currentY);
+}
+
+function onMouseUp(e) {
+  if (!isDragging) return;
+  isDragging = false;
+  handleSwipe(currentX);
+  currentX = 0;
+}
+
+function applyTransform(x, y) {
+  if (!cardStack.length) return;
+  const card = cardStack[cardStack.length - 1];
+  const rotation = x * 0.08;
+  card.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
+}
+
+function handleSwipe(x) {
+  if (!cardStack.length) return;
+  const card = cardStack[cardStack.length - 1];
+
+  if (Math.abs(x) < THROW_THRESHOLD) {
+    // Snap back
+    card.style.transform = '';
+    card.style.transition = 'transform 0.3s';
+    setTimeout(() => card.style.transition = '', 300);
+    return;
+  }
+
+  const direction = x > 0 ? 'right' : 'left';
+  const rotation = x > 0 ? 40 : -40;
+
+  // Animate out
+  card.style.transition = 'transform 0.4s ease-out, opacity 0.4s';
+  card.style.transform = `translate(${x > 0 ? 200 : -200}px, 50px) rotate(${rotation}deg)`;
+  card.style.opacity = '0';
+
+  setTimeout(() => {
+    if (direction === 'right') {
+      goDeeper();
+    } else {
+      seeResults();
+    }
+    card.remove();
+    cardStack.pop();
+    currentX = 0;
+  }, 380);
+}
+
+function goDeeper() {
+  const level = stack.length;
+  let items = [];
+  if (level === 0) {
+    // Get the top card's occasion
+    const topCard = document.querySelector('.swipe-card:last-child');
+    const title = topCard.querySelector('.card-title').textContent;
+    const occasion = DATA.mealOccasions.find(o => o.name === title);
+    if (occasion) {
+      stack.push({ type: 'occasion', data: occasion });
+    }
+  } else if (level === 1) {
+    // Already at dish level, no deeper
+    showToast('Swipe left to see restaurants!');
+    return;
+  }
+  renderStack();
+}
+
+function seeResults() {
+  const level = stack.length;
+
+  if (level === 0) {
+    // Show meal occasion results
+    const topCard = document.querySelector('.swipe-card:last-child');
+    const title = topCard.querySelector('.card-title').textContent;
+    const occasion = DATA.mealOccasions.find(o => o.name === title);
+    if (occasion) {
+      showResultList(`${occasion.name} in ${currentCity.name}`, occasion.dishes.map(d => ({
+        name: d.name,
+        emoji: d.emoji,
+        rating: d.avgRating,
+        count: d.count,
+        cuisine: 'Various',
+        dist: '',
+        hot: d.avgRating >= 4.7
+      })));
+    }
+  } else if (level === 1) {
+    // Show restaurant results for dish
+    const occasion = stack[0].data;
+    const topCard = document.querySelector('.swipe-card:last-child');
+    const title = topCard.querySelector('.card-title').textContent;
+    const dish = occasion.dishes.find(d => d.name === title);
+    if (dish) {
+      const restaurants = getRestaurants(currentCity.id, dish.id, dish.name);
+      showResultList(`${dish.name} in ${currentCity.name}`, restaurants.map(r => ({
+        name: r.name,
+        emoji: r.emoji,
+        rating: r.rating,
+        count: r.count,
+        cuisine: r.cuisine,
+        dist: r.dist,
+        hot: r.hot
+      })));
+    }
+  }
+}
+
+// ── RESULT LIST ────────────────────────────────────────────────────────
+function showResultList(title, items) {
+  const list = document.getElementById('resultList');
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultCount').textContent = `${items.length} options`;
+
+  document.getElementById('resultCards').innerHTML = items.map(r => `
+    <div class="resto-card" onclick="openResto('${r.name}')">
+      <div class="resto-top">
+        <div class="resto-thumb">${r.emoji}</div>
+        <div class="resto-info">
+          <div class="resto-name">${r.name}</div>
+          <div class="resto-cuisine">${r.cuisine}</div>
+          <div class="resto-rating">
+            <span class="resto-stars">★★★★★</span>
+            <span class="resto-score">${r.rating.toFixed(1)}</span>
+            <span class="resto-reviews">(${r.count})</span>
+          </div>
+        </div>
+        <div class="resto-right">
+          ${r.dist ? `<span class="resto-dist">${r.dist}</span>` : ''}
+          ${r.hot ? `<span class="hot-badge">Hot</span>` : ''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  list.classList.add('visible');
+}
+
+function closeResults() {
+  document.getElementById('resultList').classList.remove('visible');
+}
+
+function openResto(name) {
+  showToast(`Opening ${name}...`);
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────────────
+function goBack() {
+  if (stack.length > 0) {
+    stack.pop();
+    renderStack();
+  }
+}
+
+function navTo(view) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  showToast(`Switching to ${view}...`);
+}
+
+// ── LOCATION PICKER ────────────────────────────────────────────────────
+function openLocPicker() {
+  document.getElementById('locModal').classList.add('visible');
+}
+
+function closeLocPicker() {
+  document.getElementById('locModal').classList.remove('visible');
+}
+
+// Close modal on backdrop click
+document.getElementById('locModal').addEventListener('click', e => {
+  if (e.target.id === 'locModal') closeLocPicker();
+});
+
+// ── TOAST ─────────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── BOOT ───────────────────────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
