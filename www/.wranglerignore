@@ -1,0 +1,4 @@
+node_modules/workerd/**
+node_modules/.cache/**
+*.log
+.DS_Store
