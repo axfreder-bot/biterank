@@ -15,6 +15,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Clean node_modules before deploy
+        run: |
+          rm -rf node_modules
+          rm -rf www/node_modules
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
