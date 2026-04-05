@@ -1,4 +1,5 @@
-node_modules/workerd/**
-node_modules/.cache/**
-*.log
+node_modules/**
 .DS_Store
+*.log
+.git/
+.github/
