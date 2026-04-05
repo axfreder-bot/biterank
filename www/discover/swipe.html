@@ -603,18 +603,53 @@ const CITIES = [
   { id: 'chicago', name: 'Chicago', emoji: '🌭', count: 71 },
 ];
 
-// Mock restaurant data keyed by "city-dish"
-function getRestaurants(cityId, dishId, parentName) {
-  const base = [
-    { name: 'The ' + parentName + ' House', cuisine: 'American', emoji: '🍽️', rating: 4.8, count: 234, dist: '0.3 mi', hot: true },
-    { name: parentName + ' Expert', cuisine: 'Modern', emoji: '⭐', rating: 4.6, count: 189, dist: '0.5 mi', hot: false },
-    { name: 'Local ' + parentName + ' Co.', cuisine: 'Casual', emoji: '🏠', rating: 4.5, count: 312, dist: '0.8 mi', hot: false },
-    { name: parentName + ' District', cuisine: 'Gastro', emoji: '🍴', rating: 4.4, count: 156, dist: '1.1 mi', hot: false },
-    { name: 'The ' + parentName + ' Lab', cuisine: 'Creative', emoji: '🧪', rating: 4.3, count: 98, dist: '1.4 mi', hot: false },
-    { name: parentName + ' Masters', cuisine: 'Upscale', emoji: '👨‍🍳', rating: 4.2, count: 77, dist: '1.8 mi', hot: false },
-  ];
-  return base;
+// Google Places API - Real restaurant data
+const PLACES_API_KEY = 'AIzaSyDT7_02J7WVvg0bUjreTZo9RdyDoC2pw1A';
+
+async function getRestaurants(cityId, dishId, parentName) {
+  const city = CITIES.find(c => c.id === cityId);
+  const query = encodeURIComponent(parentName + ' in ' + city.name);
+  
+  try {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${PLACES_API_KEY}`
+    );
+    const data = await response.json();
+    
+    if (data.results && data.results.length > 0) {
+      return data.results.slice(0, 8).map(r => ({
+        name: r.name,
+        cuisine: r.types ? r.types[0] : 'Restaurant',
+        emoji: '🍽️',
+        rating: r.rating || 4.0,
+        count: r.user_ratings_total || 0,
+        dist: r.geometry ? getDistanceFromLatLonInMiles(47.6062, -122.3321, r.geometry.location.lat, r.geometry.location.lng) : '1.0 mi',
+        hot: (r.rating || 0) >= 4.5,
+        placeId: r.place_id,
+        address: r.formatted_address,
+        openNow: r.opening_hours ? r.opening_hours.open_now : null
+      }));
+    }
+  } catch (e) {
+    console.error('Places API error:', e);
+  }
+  
+  // Fallback to empty if API fails
+  return [];
 }
+
+function getDistanceFromLatLonInMiles(lat1, lon1, lat2, lon2) {
+  const R = 3958.8; // Radius of earth in miles
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return (R * c).toFixed(1) + ' mi';
+}
+
+function deg2rad(deg) { return deg * (Math.PI/180); }
 
 // ── STATE ──────────────────────────────────────────────────────────────
 let currentCity = CITIES[0];
@@ -919,31 +954,42 @@ function seeResults() {
 }
 
 // ── RESULT LIST ────────────────────────────────────────────────────────
-function showResultList(title, items) {
+async async function showResultList(title, items) {
+  // If items is a dish from level 1, fetch real restaurants
+  if (items.length > 0 && items[0].count && typeof items[0].count === 'number') {
+    const dish = items[0];
+    showToast('Finding best ' + dish.name + '...');
+    items = await getRestaurants(currentCity.id, dish.id, dish.name);
+  }
+  
   const list = document.getElementById('resultList');
   document.getElementById('resultTitle').textContent = title;
   document.getElementById('resultCount').textContent = `${items.length} options`;
 
-  document.getElementById('resultCards').innerHTML = items.map(r => `
-    <div class="resto-card" onclick="openResto('${r.name}')">
-      <div class="resto-top">
-        <div class="resto-thumb">${r.emoji}</div>
-        <div class="resto-info">
-          <div class="resto-name">${r.name}</div>
-          <div class="resto-cuisine">${r.cuisine}</div>
-          <div class="resto-rating">
-            <span class="resto-stars">★★★★★</span>
-            <span class="resto-score">${r.rating.toFixed(1)}</span>
-            <span class="resto-reviews">(${r.count})</span>
+  if (items.length === 0) {
+    document.getElementById('resultCards').innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted)">No restaurants found. Try a different dish or location.</div>';
+  } else {
+    document.getElementById('resultCards').innerHTML = items.map(r => `
+      <div class="resto-card" onclick="openResto('${r.placeId}', '${r.name.replace(/'/g, "\'")}')">
+        <div class="resto-top">
+          <div class="resto-thumb">${r.emoji}</div>
+          <div class="resto-info">
+            <div class="resto-name">${r.name}</div>
+            <div class="resto-cuisine">${r.cuisine}</div>
+            <div class="resto-rating">
+              <span class="resto-stars">${'★'.repeat(Math.floor(r.rating))}${'☆'.repeat(5-Math.floor(r.rating))}</span>
+              <span class="resto-score">${r.rating.toFixed(1)}</span>
+              <span class="resto-reviews">(${r.count || 0})</span>
+            </div>
+          </div>
+          <div class="resto-right">
+            ${r.dist ? `<span class="resto-dist">${r.dist}</span>` : ''}
+            ${r.hot ? `<span class="hot-badge">Hot</span>` : ''}
           </div>
         </div>
-        <div class="resto-right">
-          ${r.dist ? `<span class="resto-dist">${r.dist}</span>` : ''}
-          ${r.hot ? `<span class="hot-badge">Hot</span>` : ''}
-        </div>
       </div>
-    </div>
-  `).join('');
+    `).join('');
+  }
 
   list.classList.add('visible');
 }
@@ -952,8 +998,13 @@ function closeResults() {
   document.getElementById('resultList').classList.remove('visible');
 }
 
-function openResto(name) {
-  showToast(`Opening ${name}...`);
+function openResto(placeId, name) {
+  if (placeId) {
+    // Show detail modal instead of opening Google Maps
+    openDetailModal(placeId, name, 4.5, '123 Main St, Seattle, WA', '(206) 555-0123', 'Open until 10pm');
+  } else {
+    showToast(`Opening ${name}...`);
+  }
 }
 
 // ── NAVIGATION ────────────────────────────────────────────────────────
@@ -994,6 +1045,440 @@ function showToast(msg) {
 
 // ── BOOT ───────────────────────────────────────────────────────────────
 init();
+
+// ── RESTAURANT DETAIL MODAL ───────────────────────────────────────────
+let currentPlaceId = null;
+let selectedRating = 0;
+
+function openDetailModal(placeId, name, rating, address, phone, hours) {
+  currentPlaceId = placeId;
+  document.getElementById('detailName').textContent = name;
+  document.getElementById('detailRating').innerHTML = 
+    '<span class="stars">' + '★'.repeat(Math.floor(rating)) + '</span>' +
+    '<span class="score">' + rating.toFixed(1) + '</span>';
+  document.getElementById('detailAddress').textContent = '📍 ' + (address || 'Address not available');
+  document.getElementById('detailHours').textContent = '🕒 ' + (hours || 'Hours not available');
+  document.getElementById('detailPhone').textContent = '📞 ' + (phone || 'Phone not available');
+  
+  // Load mock dishes for this restaurant
+  loadRestaurantDishes(name);
+  
+  // Load existing reviews
+  loadReviews(placeId);
+  
+  document.getElementById('detailModal').classList.add('visible');
+}
+
+function closeDetailModal() {
+  document.getElementById('detailModal').classList.remove('visible');
+  currentPlaceId = null;
+}
+
+function loadRestaurantDishes(restaurantName) {
+  // Mock dish data - in production, fetch from API based on place_id
+  const dishes = [
+    { name: 'Street Tacos', rating: 4.5, reviews: 89 },
+    { name: 'Al Pastor', rating: 4.8, reviews: 156 },
+    { name: 'Carnitas', rating: 4.3, reviews: 67 },
+    { name: 'Guacamole', rating: 4.6, reviews: 98 },
+  ];
+  
+  document.getElementById('dishList').innerHTML = dishes.map(d => `
+    <div class="dish-item">
+      <span class="dish-name">${d.name}</span>
+      <span class="dish-rating">★ ${d.rating} (${d.reviews})</span>
+    </div>
+  `).join('');
+}
+
+// Star rating selection
+document.querySelectorAll('.star-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    selectedRating = parseInt(this.dataset.rating);
+    document.querySelectorAll('.star-btn').forEach((b, i) => {
+      b.classList.toggle('selected', i < selectedRating);
+    });
+  });
+});
+
+function submitReview() {
+  const name = document.getElementById('reviewerName').value || 'Anonymous';
+  const text = document.getElementById('reviewText').value;
+  
+  if (!text || selectedRating === 0) {
+    showToast('Please select a rating and write a review');
+    return;
+  }
+  
+  // In production, save to database
+  const review = {
+    name: name,
+    rating: selectedRating,
+    text: text,
+    date: new Date().toLocaleDateString()
+  };
+  
+  // Add to display
+  const reviewList = document.getElementById('reviewList');
+  const newReview = document.createElement('div');
+  newReview.className = 'review-item';
+  newReview.innerHTML = `
+    <div class="review-header">
+      <span class="reviewer-name">${review.name}</span>
+      <span class="review-date">${review.date}</span>
+    </div>
+    <div style="color:var(--accent);margin-bottom:4px">${'★'.repeat(review.rating)}</div>
+    <div class="review-text">${review.text}</div>
+  `;
+  reviewList.insertBefore(newReview, reviewList.firstChild);
+  
+  // Clear form
+  document.getElementById('reviewText').value = '';
+  document.getElementById('reviewerName').value = '';
+  selectedRating = 0;
+  document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('selected'));
+  
+  showToast('Review submitted! Thanks for sharing.');
+}
+
+function loadReviews(placeId) {
+  // Mock reviews - in production, fetch from database
+  const reviews = [
+    { name: 'FoodLover123', rating: 5, text: 'Best tacos in the city!', date: '2026-04-01' },
+    { name: 'SeattleEats', rating: 4, text: 'Great ambiance, slightly pricey', date: '2026-03-28' },
+  ];
+  
+  document.getElementById('reviewList').innerHTML = reviews.map(r => `
+    <div class="review-item">
+      <div class="review-header">
+        <span class="reviewer-name">${r.name}</span>
+        <span class="review-date">${r.date}</span>
+      </div>
+      <div style="color:var(--accent);margin-bottom:4px">${'★'.repeat(r.rating)}</div>
+      <div class="review-text">${r.text}</div>
+    </div>
+  `).join('');
+}
+
+
+// Restaurant Detail Modal
+let currentPlaceId = null;
+let selectedRating = 0;
+
+function openDetailModal(placeId, name, rating, address, phone, hours) {
+  currentPlaceId = placeId;
+  document.getElementById('detailName').textContent = name;
+  document.getElementById('detailRating').innerHTML = '<span class="stars">' + '★'.repeat(Math.floor(rating)) + '</span><span class="score">' + rating.toFixed(1) + '</span>';
+  document.getElementById('detailAddress').textContent = '📍 ' + (address || 'Address not available');
+  document.getElementById('detailHours').textContent = '🕒 ' + (hours || 'Hours not available');
+  loadRestaurantDishes(name);
+  loadReviews(placeId);
+  document.getElementById('detailModal').classList.add('visible');
+}
+
+function closeDetailModal() {
+  document.getElementById('detailModal').classList.remove('visible');
+  currentPlaceId = null;
+}
+
+function loadRestaurantDishes(restaurantName) {
+  const dishes = [
+    { name: 'Street Tacos', rating: 4.5, reviews: 89 },
+    { name: 'Al Pastor', rating: 4.8, reviews: 156 },
+    { name: 'Carnitas', rating: 4.3, reviews: 67 },
+    { name: 'Guacamole', rating: 4.6, reviews: 98 },
+  ];
+  document.getElementById('dishList').innerHTML = dishes.map(d => '<div class="dish-item"><span class="dish-name">' + d.name + '</span><span class="dish-rating">★ ' + d.rating + ' (' + d.reviews + ')</span></div>').join('');
+}
+
+function submitReview() {
+  const name = document.getElementById('reviewerName').value || 'Anonymous';
+  const text = document.getElementById('reviewText').value;
+  if (!text || selectedRating === 0) {
+    showToast('Please select a rating and write a review');
+    return;
+  }
+  const review = { name: name, rating: selectedRating, text: text, date: new Date().toLocaleDateString() };
+  const newReview = document.createElement('div');
+  newReview.className = 'review-item';
+  newReview.innerHTML = '<div class="review-header"><span class="reviewer-name">' + review.name + '</span><span class="review-date">' + review.date + '</span></div><div style="color:var(--accent);margin-bottom:4px">' + '★'.repeat(review.rating) + '</div><div class="review-text">' + review.text + '</div>';
+  document.getElementById('reviewList').insertBefore(newReview, document.getElementById('reviewList').firstChild);
+  document.getElementById('reviewText').value = '';
+  document.getElementById('reviewerName').value = '';
+  selectedRating = 0;
+  document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('selected'));
+  showToast('Review submitted!');
+}
+
+function loadReviews(placeId) {
+  const reviews = [
+    { name: 'FoodLover123', rating: 5, text: 'Best tacos in the city!', date: '2026-04-01' },
+    { name: 'SeattleEats', rating: 4, text: 'Great ambiance, slightly pricey', date: '2026-03-28' },
+  ];
+  document.getElementById('reviewList').innerHTML = reviews.map(r => '<div class="review-item"><div class="review-header"><span class="reviewer-name">' + r.name + '</span><span class="review-date">' + r.date + '</span></div><div style="color:var(--accent);margin-bottom:4px">' + '★'.repeat(r.rating) + '</div><div class="review-text">' + r.text + '</div></div>').join('');
+}
+
+// Star rating setup
+document.querySelectorAll('.star-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    selectedRating = parseInt(this.dataset.rating);
+    document.querySelectorAll('.star-btn').forEach((b, i) => {
+      b.classList.toggle('selected', i < selectedRating);
+    });
+  });
+});
 </script>
+
+<!-- RESTAURANT DETAIL MODAL -->
+<div class="detail-modal" id="detailModal">
+  <div class="detail-overlay" onclick="closeDetailModal()"></div>
+  <div class="detail-sheet">
+    <div class="detail-header">
+      <button class="detail-back" onclick="closeDetailModal()">←</button>
+      <div class="detail-title-wrap">
+        <div class="detail-name" id="detailName">Restaurant Name</div>
+        <div class="detail-rating" id="detailRating">
+          <span class="stars"></span>
+          <span class="score"></span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="detail-info">
+      <div class="detail-address" id="detailAddress">📍 Address</div>
+      <div class="detail-hours" id="detailHours">🕒 Hours</div>
+      <div class="detail-phone" id="detailPhone">📞 Phone</div>
+    </div>
+    
+    <div class="detail-section">
+      <div class="section-title">Popular Dishes</div>
+      <div class="dish-list" id="dishList"></div>
+    </div>
+    
+    <div class="detail-section">
+      <div class="section-title">Add Your Review</div>
+      <div class="review-form" id="reviewForm">
+        <input type="text" id="reviewerName" placeholder="Your name (optional)">
+        <div class="rating-select">
+          <span>Rating:</span>
+          <button class="star-btn" data-rating="1">★</button>
+          <button class="star-btn" data-rating="2">★</button>
+          <button class="star-btn" data-rating="3">★</button>
+          <button class="star-btn" data-rating="4">★</button>
+          <button class="star-btn" data-rating="5">★</button>
+        </div>
+        <textarea id="reviewText" placeholder="Write your review..."></textarea>
+        <button class="submit-review" onclick="submitReview()">Submit Review</button>
+      </div>
+    </div>
+    
+    <div class="detail-section">
+      <div class="section-title">Recent Reviews</div>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+.detail-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+.detail-modal.visible { display: block; }
+.detail-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+}
+.detail-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border-radius: 24px 24px 0 0;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
+}
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.detail-back {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 1.2rem;
+}
+.detail-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.detail-rating { margin-top: 4px; }
+.detail-rating .stars { color: var(--accent); }
+.detail-rating .score { font-weight: 700; margin-left: 4px; }
+.detail-info {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.detail-info > div {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+.detail-section {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.section-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+}
+.dish-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: var(--card);
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+.dish-name { font-weight: 600; }
+.dish-rating { color: var(--accent); }
+.review-form input, .review-form textarea {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  color: var(--text);
+  font-family: inherit;
+  margin-bottom: 10px;
+}
+.rating-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--border);
+  cursor: pointer;
+}
+.star-btn.selected { color: var(--accent); }
+.submit-review {
+  width: 100%;
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+.review-item {
+  padding: 12px;
+  background: var(--card);
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.reviewer-name { font-weight: 600; }
+.review-date { font-size: 0.75rem; color: var(--muted); }
+.review-text { font-size: 0.85rem; color: var(--muted); }
+</style>
+
+
+<!-- RESTAURANT DETAIL MODAL -->
+<div class="detail-modal" id="detailModal">
+  <div class="detail-overlay" onclick="closeDetailModal()"></div>
+  <div class="detail-sheet">
+    <div class="detail-header">
+      <button class="detail-back" onclick="closeDetailModal()">←</button>
+      <div class="detail-title-wrap">
+        <div class="detail-name" id="detailName">Restaurant Name</div>
+        <div class="detail-rating" id="detailRating"></div>
+      </div>
+    </div>
+    <div class="detail-info">
+      <div class="detail-address" id="detailAddress"></div>
+      <div class="detail-hours" id="detailHours"></div>
+    </div>
+    <div class="detail-section">
+      <div class="section-title">Popular Dishes</div>
+      <div class="dish-list" id="dishList"></div>
+    </div>
+    <div class="detail-section">
+      <div class="section-title">Add Your Review</div>
+      <div class="review-form">
+        <input type="text" id="reviewerName" placeholder="Your name (optional)">
+        <div class="rating-select">
+          <button class="star-btn" data-rating="1">★</button>
+          <button class="star-btn" data-rating="2">★</button>
+          <button class="star-btn" data-rating="3">★</button>
+          <button class="star-btn" data-rating="4">★</button>
+          <button class="star-btn" data-rating="5">★</button>
+        </div>
+        <textarea id="reviewText" placeholder="Write your review..."></textarea>
+        <button class="submit-review" onclick="submitReview()">Submit Review</button>
+      </div>
+    </div>
+    <div class="detail-section">
+      <div class="section-title">Recent Reviews</div>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+.detail-modal { display: none; position: fixed; inset: 0; z-index: 1000; }
+.detail-modal.visible { display: block; }
+.detail-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
+.detail-sheet { position: absolute; bottom: 0; left: 0; right: 0; background: var(--surface); border-radius: 24px 24px 0 0; max-height: 90vh; overflow-y: auto; padding-bottom: 20px; }
+.detail-header { display: flex; align-items: center; gap: 12px; padding: 16px; border-bottom: 1px solid var(--border); }
+.detail-back { width: 36px; height: 36px; border-radius: 50%; background: var(--card); border: 1px solid var(--border); color: var(--muted); font-size: 1.2rem; }
+.detail-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; }
+.detail-rating { margin-top: 4px; }
+.detail-rating .stars { color: var(--accent); }
+.detail-rating .score { font-weight: 700; margin-left: 4px; }
+.detail-info { padding: 16px; border-bottom: 1px solid var(--border); }
+.detail-info > div { color: var(--muted); font-size: 0.85rem; margin-bottom: 6px; }
+.detail-section { padding: 16px; border-bottom: 1px solid var(--border); }
+.section-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+.dish-item { display: flex; justify-content: space-between; padding: 10px; background: var(--card); border-radius: 12px; margin-bottom: 8px; }
+.dish-name { font-weight: 600; }
+.dish-rating { color: var(--accent); }
+.review-form input, .review-form textarea { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px; color: var(--text); font-family: inherit; margin-bottom: 10px; }
+.rating-select { display: flex; gap: 8px; margin-bottom: 10px; }
+.star-btn { background: none; border: none; font-size: 1.5rem; color: var(--border); cursor: pointer; }
+.star-btn.selected { color: var(--accent); }
+.submit-review { width: 100%; background: var(--accent); border: none; border-radius: 12px; padding: 14px; color: white; font-weight: 700; cursor: pointer; }
+.review-item { padding: 12px; background: var(--card); border-radius: 12px; margin-bottom: 8px; }
+.review-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
+.reviewer-name { font-weight: 600; font-size: 0.85rem; }
+.review-date { font-size: 0.75rem; color: var(--muted); }
+.review-text { font-size: 0.85rem; color: var(--muted); }
+</style>
 </body>
 </html>
