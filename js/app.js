@@ -345,8 +345,24 @@ function isLikelyOpen(r) {
   return null;
 }
 
+// Validate Google Places ID format - only accept real Places API IDs
+// Valid formats: ChIJ*, Chg*, E* (various encoded types)
+// This rejects any fake/generated IDs
+function isValidGooglePlaceId(placeId) {
+  if (!placeId || typeof placeId !== 'string') return false;
+  // Google Places IDs typically start with ChIJ, Chg, or E (encoded)
+  // They are 25-50 characters, alphanumeric plus some special chars
+  return /^ChIJ|Chg|E[a-zA-Z0-9_-]{10,}$/.test(placeId);
+}
+
 // Convert Google Places result to our restaurant object
 function googleToRestaurant(place) {
+  // STRICT VERIFICATION: Only accept restaurants with valid Google Places IDs
+  // This prevents any fake or generated data from appearing
+  if (!place?.id || !isValidGooglePlaceId(place.id)) {
+    return null;
+  }
+  
   const loc = place.location || {};
   const lat = loc.latitude;
   const lng = loc.longitude;

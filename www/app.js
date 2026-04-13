@@ -260,6 +260,47 @@ function showToast(msg,dur=2600){
   t.textContent=msg;t.classList.add('show');
   clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),dur);
 }
+
+// ═══════════════════════════════════════════════
+//  WELCOME MODAL — First-time user experience
+// ═══════════════════════════════════════════════
+const WELCOME_KEY = 'biterank_welcomed';
+
+function showWelcomeModal() {
+  if (localStorage.getItem(WELCOME_KEY)) return;
+  
+  const existing = document.getElementById('welcomeModal');
+  if (existing) return;
+  
+  const div = document.createElement('div');
+  div.className = 'welcome-overlay';
+  div.id = 'welcomeModal';
+  div.innerHTML = `
+    <div class="welcome-card">
+      <span class="welcome-icon">🍴</span>
+      <h2>Welcome to BiteRank</h2>
+      <p>Discover the best dishes in your city. No ambiance scores, no fluff — just great food.</p>
+      <ul class="welcome-features">
+        <li><span>🎯</span> Swipe to find your next favorite meal</li>
+        <li><span>📍</span> Track down specific dishes near you</li>
+        <li><span>⭐</span> Rate dishes and earn XP</li>
+      </ul>
+      <button class="welcome-btn" onclick="dismissWelcomeModal()">Let's Eat!</button>
+      <button class="welcome-skip" onclick="dismissWelcomeModal()">Skip</button>
+    </div>`;
+  document.body.appendChild(div);
+}
+
+function dismissWelcomeModal() {
+  const el = document.getElementById('welcomeModal');
+  if (el) {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.25s';
+    setTimeout(() => el.remove(), 250);
+  }
+  localStorage.setItem(WELCOME_KEY, 'true');
+}
+
 function closeOverlay(id,e){
   if(e.target===document.getElementById(id)) document.getElementById(id).classList.remove('open');
 }
@@ -304,8 +345,24 @@ function isLikelyOpen(r) {
   return null;
 }
 
+// Validate Google Places ID format - only accept real Places API IDs
+// Valid formats: ChIJ*, Chg*, E* (various encoded types)
+// This rejects any fake/generated IDs
+function isValidGooglePlaceId(placeId) {
+  if (!placeId || typeof placeId !== 'string') return false;
+  // Google Places IDs typically start with ChIJ, Chg, or E (encoded)
+  // They are 25-50 characters, alphanumeric plus some special chars
+  return /^ChIJ|Chg|E[a-zA-Z0-9_-]{10,}$/.test(placeId);
+}
+
 // Convert Google Places result to our restaurant object
 function googleToRestaurant(place) {
+  // STRICT VERIFICATION: Only accept restaurants with valid Google Places IDs
+  // This prevents any fake or generated data from appearing
+  if (!place?.id || !isValidGooglePlaceId(place.id)) {
+    return null;
+  }
+  
   const loc = place.location || {};
   const lat = loc.latitude;
   const lng = loc.longitude;
@@ -815,7 +872,7 @@ function renderCard(r) {
     : '';
   const photo = (localPhotos[r.id]||[])[0];
   const thumb = photo
-    ? `<div class="dish-thumb"><img src="${photo}" alt=""/></div>`
+    ? `<div class="dish-thumb"><img src="${photo}" alt="" loading="lazy"/></div>`
     : `<div class="dish-thumb">${r.emoji}</div>`;
 
   const isSaved = savedList.has(r.id);
@@ -1086,7 +1143,7 @@ function openDishItem(restaurantId, dishId) {
         <div class="rev-date">${rv.date}</div>
       </div>
       <div class="rev-text">${rv.text}</div>
-      ${rv.photo ? `<img class="rev-photo" src="${rv.photo}"/>` : ''}
+      ${rv.photo ? `<img class="rev-photo" src="${rv.photo}" loading="lazy"/>` : ''}
     </div>`).join('')
     : `<div style="color:var(--muted);font-size:.84rem;padding:6px 0">No reviews yet — be the first!</div>`;
 
@@ -1153,7 +1210,7 @@ function openAddDishForm(restaurantId) {
         <div class="upload-icon">📷</div>
         <div class="upload-text">Tap to upload · <span>JPG, PNG</span></div>
       </div>
-      <div class="preview-box" id="previewBox"><img id="photoPreview" src="" alt=""/></div>
+      <div class="preview-box" id="previewBox"><img id="photoPreview" src="" alt="" loading="lazy"/></div>
     </div>
     <button class="submit-btn" onclick="submitNewDish('${restaurantId}')">Add Dish & Review</button>`;
   selectedStars = 0;
@@ -1295,9 +1352,9 @@ async function openDish(id) {
   const photos = localPhotos[id]||[];
   const galleryHTML = photos.length ? `
     <div class="sec-sub" style="margin-top:2px">Photos (${photos.length})</div>
-    <div class="pgallery">${photos.map(p=>`<div class="pgallery-cell"><img src="${p}"/></div>`).join('')}</div>` : '';
+    <div class="pgallery">${photos.map(p=>`<div class="pgallery-cell"><img src="${p}" loading="lazy"/></div>`).join('')}</div>` : '';
 
-  const heroThumb = photos.length ? `<img src="${photos[0]}" style="width:100%;height:100%;object-fit:cover"/>` : r.emoji;
+  const heroThumb = photos.length ? `<img src="${photos[0]}" style="width:100%;height:100%;object-fit:cover" loading="lazy"/>` : r.emoji;
 
   const revsHTML = revs.length ? revs.map(rv=>`
     <div class="rev-item">
@@ -1309,7 +1366,7 @@ async function openDish(id) {
         <div class="rev-date">${rv.date}</div>
       </div>
       <div class="rev-text">${rv.text}</div>
-      ${rv.photo?`<img class="rev-photo" src="${rv.photo}"/>`:''}
+      ${rv.photo?`<img class="rev-photo" src="${rv.photo}" loading="lazy"/>`:''}
     </div>`).join('')
     : `<div style="color:var(--muted);font-size:.85rem;padding:8px 0">No reviews yet. Be the first — and keep it about the food.</div>`;
 
@@ -1385,7 +1442,7 @@ function openReview(prefillDishName='') {
         <div class="upload-icon">📷</div>
         <div class="upload-text">Tap to upload · <span>JPG, PNG, HEIC</span></div>
       </div>
-      <div class="preview-box" id="previewBox"><img id="photoPreview" src="" alt=""/></div>
+      <div class="preview-box" id="previewBox"><img id="photoPreview" src="" alt="" loading="lazy"/></div>
     </div>
     <button class="submit-btn" onclick="submitReview()">Submit Review</button>`;
   document.getElementById('reviewOverlay').classList.add('open');
@@ -1919,7 +1976,7 @@ function updateHdrAvatar(){
     const lb=document.getElementById('levelBadge');if(lb)lb.style.display='none';
     return;
   }
-  const inner=currentUser.avatarImg?`<img src="${currentUser.avatarImg}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" referrerpolicy="no-referrer"/>`:(currentUser.av||'?');
+  const inner=currentUser.avatarImg?`<img src="${currentUser.avatarImg}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" referrerpolicy="no-referrer" loading="lazy"/>`:(currentUser.av||'?');
   const adminBtn = isAdmin ? `<button class="admin-btn" onclick="openAdmin()" title="Admin Dashboard">⚙️</button>` : '';
   h.innerHTML=`${adminBtn}<button class="feedback-btn" onclick="openFeedback()" title="Send Feedback">💬</button><div class="avatar-btn" onclick="switchView('profile',document.querySelectorAll('.nitem')[4])">${inner}</div>`;
 }
@@ -1950,7 +2007,7 @@ function renderProfile(){
   for(const [rid,revs] of Object.entries(localReviews)){
     revs.filter(r=>r.user===currentUser.name).forEach(r=>allRevs.push({...r,restId:rid}));
   }
-  const inner=currentUser.avatarImg?`<img src="${currentUser.avatarImg}"/>`:(currentUser.av||'?');
+  const inner=currentUser.avatarImg?`<img src="${currentUser.avatarImg}" loading="lazy"/>`:(currentUser.av||'?');
   el.innerHTML=`<div class="prof-hdr">
     <div class="prof-av-wrap"><div class="prof-av" id="pAv">${inner}</div><div class="av-edit" onclick="document.getElementById('avFile').click()">✏️</div><input type="file" id="avFile" accept="image/*" style="display:none" onchange="uploadAvatar(event)"/></div>
     <div class="prof-name">${currentUser.name}</div><div class="prof-email">${currentUser.email}</div>
@@ -1972,7 +2029,7 @@ function renderProfile(){
         <div style="color:var(--muted);font-size:.74rem">${starsHTML(r.rating,'0.7rem')} · ${r.date}</div></div>
       </div>
       <div style="color:#b8b0a4;font-size:.82rem;line-height:1.5">${r.text}</div>
-      ${r.photo?`<img class="rev-mine-img" src="${r.photo}"/>`:''}
+      ${r.photo?`<img class="rev-mine-img" src="${r.photo}" loading="lazy"/>`:''}
     </div>`).join(''):`<div style="color:var(--muted);font-size:.85rem;line-height:1.6">No reviews yet. Find a restaurant and share your thoughts!</div>`}
     <button class="logout-btn" onclick="signOut()">Sign Out</button>
   </div>`;
@@ -2636,7 +2693,7 @@ function renderCityContent() {
     const distBadge = dist !== null ? `<span class="dish-dist">${distLabel(dist)}</span>` : '';
     const photo = (localPhotos[r.id]||[])[0];
     const thumb = photo
-      ? `<div class="dish-rank-thumb"><img src="${photo}" alt=""/></div>`
+      ? `<div class="dish-rank-thumb"><img src="${photo}" alt="" loading="lazy"/></div>`
       : `<div class="dish-rank-thumb">${r.emoji}</div>`;
     const rating = r.rating;
     const ratingEl = rating
@@ -4390,6 +4447,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     handleHashRoute();
     updateWishlistCount(); // Initialize wishlist badge
+    showWelcomeModal(); // Show welcome modal for first-time users
   }, 1000); // Wait for auth and location init
 });
 
