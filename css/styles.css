@@ -292,8 +292,11 @@ section{padding:18px 14px;}
 
 /* EMPTY / ERROR */
 .empty{text-align:center;padding:36px 20px;color:var(--muted);}
-.empty .ei{font-size:2.2rem;margin-bottom:10px;}
+.empty .ei{font-size:2.2rem;margin-bottom:10px;display:block;}
 .empty p{font-size:.87rem;line-height:1.6;}
+.empty-action{display:inline-block;margin-top:14px;background:var(--accent);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;padding:10px 20px;border-radius:24px;cursor:pointer;transition:background .2s,transform .15s;}
+.empty-action:hover{background:#d4743c;}
+.empty-action:active{transform:scale(.95);}
 .expand-btn{display:inline-block;margin-top:12px;background:var(--accent);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:.83rem;padding:9px 18px;border-radius:20px;cursor:pointer;}
 
 /* ── RESULTS SECTIONS ── */
@@ -339,6 +342,21 @@ section{padding:18px 14px;}
 /* TOAST */
 .toast{position:fixed;bottom:74px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--card);border:1px solid var(--border);color:var(--text);padding:9px 18px;border-radius:30px;font-size:.82rem;opacity:0;transition:all .3s;z-index:700;white-space:nowrap;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── WELCOME MODAL ── */
+.welcome-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:950;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px);}
+.welcome-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;width:100%;max-width:400px;padding:32px 26px 26px;animation:slideUp .4s cubic-bezier(.34,1.56,.64,1);text-align:center;}
+.welcome-icon{font-size:3rem;margin-bottom:16px;display:block;}
+.welcome-card h2{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:10px;color:var(--text);}
+.welcome-card p{color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:24px;}
+.welcome-features{display:text-align:left;margin-bottom:24px;}
+.welcome-features li{color:var(--muted);font-size:.85rem;margin-bottom:10px;display:flex;align-items:flex-start;gap:10px;list-style:none;}
+.welcome-features li span{font-size:1.1rem;flex-shrink:0;}
+.welcome-btn{width:100%;background:var(--accent);border:none;border-radius:14px;color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;padding:15px;cursor:pointer;transition:background .2s,transform .15s;}
+.welcome-btn:hover{background:#d4743c;}
+.welcome-btn:active{transform:scale(.97);}
+.welcome-skip{background:transparent;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.82rem;margin-top:14px;cursor:pointer;padding:8px;}
+.welcome-skip:hover{color:var(--text);}
 
 /* ── CITY PAGE ── */
 .city-page-hero{padding:22px 16px 16px;background:linear-gradient(135deg,#1e1810 0%,var(--bg) 80%);border-bottom:1px solid var(--border);}
@@ -1001,5 +1019,142 @@ select#prefHomeCity option {
 
 .pref-mode-btn.active {
   border-color: var(--accent) !important;
+}
+
+/* ── ENHANCED MICRO-INTERACTIONS ── */
+/* Smooth focus outlines for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Button press feedback */
+button:active {
+  transform: scale(0.96);
+}
+
+/* Improved card hover lift */
+.dish-card:hover,
+.dish-rank-card:hover,
+.resto-card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Better loading skeleton shimmer */
+@keyframes shimmer {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+.skel-card .shimmer,
+.skel-thumb {
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Empty state improvements */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.empty-state .empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.empty-state h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+/* Skeleton loading with gradient */
+.skeleton {
+  background: linear-gradient(90deg, var(--card) 25%, var(--border) 50%, var(--card) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Smooth view transitions */
+.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Toast improvements - better visibility */
+.toast {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* Mobile-friendly tap highlight */
+button, .tag, .city-btn, .dish-chip, .city-card, .dish-card, .resto-card {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent layout shift on image load */
+img {
+  background: var(--surface);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── PERFORMANCE OPTIMIZATIONS ── */
+/* Native lazy loading fallback */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded,
+img:not([loading]) {
+  opacity: 1;
+}
+
+/* GPU-accelerated animations */
+.swipe-card,
+.dish-card,
+.dish-rank-card,
+.resto-card,
+.city-card,
+.dish-chip,
+.cat-pill {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Preload critical fonts */
+@font-face {
+  font-family: 'DM Sans';
+  font-display: swap;
 }
 

@@ -1,0 +1,169 @@
+// Google Places API - Real restaurant data
+const PLACES_API_KEY = 'AIzaSyDT7_02J7WVvg0bUjreTZo9RdyDoC2pw1A';
+
+async function getRestaurants(cityId, dishId, parentName) {
+  const city = CITIES.find(c => c.id === cityId);
+  const query = encodeURIComponent(parentName + ' in ' + city.name);
+  
+  try {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${PLACES_API_KEY}`
+    );
+    const data = await response.json();
+    
+    if (data.results && data.results.length > 0) {
+      return data.results.slice(0, 8).map(r => ({
+        name: r.name,
+        cuisine: r.types ? r.types[0] : 'Restaurant',
+        emoji: '🍽️',
+        rating: r.rating || 4.0,
+        count: r.user_ratings_total || 0,
+        dist: r.geometry ? getDistanceFromLatLonInMiles(47.6062, -122.3321, r.geometry.location.lat, r.geometry.location.lng) : '1.0 mi',
+        hot: (r.rating || 0) >= 4.5,
+        placeId: r.place_id,
+        address: r.formatted_address,
+        openNow: r.opening_hours ? r.opening_hours.open_now : null
+      }));
+    }
+  } catch (e) {
+    console.error('Places API error:', e);
+  }
+  
+  return [];
+}
+
+function getDistanceFromLatLonInMiles(lat1, lon1, lat2, lon2) {
+  const R = 3958.8;
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return (R * c).toFixed(1) + ' mi';
+}
+
+function deg2rad(deg) { return deg * (Math.PI/180); }
+
+async function showResultList(title, items) {
+  if (items.length > 0 && items[0].count && typeof items[0].count === 'number') {
+    const dish = items[0];
+    showToast('Finding best ' + dish.name + '...');
+    items = await getRestaurants(currentCity.id, dish.id, dish.name);
+  }
+  
+  const list = document.getElementById('resultList');
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultCount').textContent = items.length + ' options';
+
+  if (items.length === 0) {
+    document.getElementById('resultCards').innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted)">No restaurants found. Try a different dish or location.</div>';
+  } else {
+    document.getElementById('resultCards').innerHTML = items.map(r => `
+      <div class="resto-card" onclick="openResto('${r.placeId}', '${r.name.replace(/'/g, "\\'")}')">
+        <div class="resto-top">
+          <div class="resto-thumb">${r.emoji}</div>
+          <div class="resto-info">
+            <div class="resto-name">${r.name}</div>
+            <div class="resto-cuisine">${r.cuisine}</div>
+            <div class="resto-rating">
+              <span class="resto-stars">${'★'.repeat(Math.floor(r.rating))}${'☆'.repeat(5-Math.floor(r.rating))}</span>
+              <span class="resto-score">${r.rating.toFixed(1)}</span>
+              <span class="resto-reviews">(${r.count || 0})</span>
+            </div>
+          </div>
+          <div class="resto-right">
+            ${r.dist ? `<span class="resto-dist">${r.dist}</span>` : ''}
+            ${r.hot ? `<span class="hot-badge">Hot</span>` : ''}
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+  list.classList.add('visible');
+}
+
+function openResto(placeId, name) {
+  if (placeId) {
+    openDetailModal(placeId, name, 4.5, '123 Main St', '(206) 555-0123', 'Open until 10pm');
+  } else {
+    showToast('Opening ' + name + '...');
+  }
+}
+
+// Restaurant Detail Modal
+let currentPlaceId = null;
+let selectedRating = 0;
+
+function openDetailModal(placeId, name, rating, address, phone, hours) {
+  currentPlaceId = placeId;
+  document.getElementById('detailName').textContent = name;
+  document.getElementById('detailRating').innerHTML = 
+    '<span class="stars">' + '★'.repeat(Math.floor(rating)) + '</span>' +
+    '<span class="score">' + rating.toFixed(1) + '</span>';
+  document.getElementById('detailAddress').textContent = '📍 ' + (address || 'Address not available');
+  document.getElementById('detailHours').textContent = '🕒 ' + (hours || 'Hours not available');
+  document.getElementById('detailPhone').textContent = '📞 ' + (phone || 'Phone not available');
+  loadRestaurantDishes(name);
+  loadReviews(placeId);
+  document.getElementById('detailModal').classList.add('visible');
+}
+
+function closeDetailModal() {
+  document.getElementById('detailModal').classList.remove('visible');
+  currentPlaceId = null;
+}
+
+function loadRestaurantDishes(restaurantName) {
+  const dishes = [
+    { name: 'Street Tacos', rating: 4.5, reviews: 89 },
+    { name: 'Al Pastor', rating: 4.8, reviews: 156 },
+    { name: 'Carnitas', rating: 4.3, reviews: 67 },
+    { name: 'Guacamole', rating: 4.6, reviews: 98 },
+  ];
+  document.getElementById('dishList').innerHTML = dishes.map(d => `
+    <div class="dish-item">
+      <span class="dish-name">${d.name}</span>
+      <span class="dish-rating">★ ${d.rating} (${d.reviews})</span>
+    </div>
+  `).join('');
+}
+
+function submitReview() {
+  const name = document.getElementById('reviewerName').value || 'Anonymous';
+  const text = document.getElementById('reviewText').value;
+  if (!text || selectedRating === 0) {
+    showToast('Please select a rating and write a review');
+    return;
+  }
+  const review = { name: name, rating: selectedRating, text: text, date: new Date().toLocaleDateString() };
+  const newReview = document.createElement('div');
+  newReview.className = 'review-item';
+  newReview.innerHTML = '<div class="review-header"><span class="reviewer-name">' + review.name + '</span><span class="review-date">' + review.date + '</span></div><div style="color:var(--accent);margin-bottom:4px">' + '★'.repeat(review.rating) + '</div><div class="review-text">' + review.text + '</div>';
+  document.getElementById('reviewList').insertBefore(newReview, document.getElementById('reviewList').firstChild);
+  document.getElementById('reviewText').value = '';
+  document.getElementById('reviewerName').value = '';
+  selectedRating = 0;
+  document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('selected'));
+  showToast('Review submitted! Thanks for sharing.');
+}
+
+function loadReviews(placeId) {
+  const reviews = [
+    { name: 'FoodLover123', rating: 5, text: 'Best tacos in the city!', date: '2026-04-01' },
+    { name: 'SeattleEats', rating: 4, text: 'Great ambiance, slightly pricey', date: '2026-03-28' },
+  ];
+  document.getElementById('reviewList').innerHTML = reviews.map(r => '<div class="review-item"><div class="review-header"><span class="reviewer-name">' + r.name + '</span><span class="review-date">' + r.date + '</span></div><div style="color:var(--accent);margin-bottom:4px">' + '★'.repeat(r.rating) + '</div><div class="review-text">' + r.text + '</div></div>').join('');
+}
+
+// Star rating setup
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.star-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      selectedRating = parseInt(this.dataset.rating);
+      document.querySelectorAll('.star-btn').forEach((b, i) => {
+        b.classList.toggle('selected', i < selectedRating);
+      });
+    });
+  });
+});
